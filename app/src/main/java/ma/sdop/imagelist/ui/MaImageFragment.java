@@ -20,12 +20,12 @@ import java.util.List;
 import ma.sdop.imagelist.R;
 import ma.sdop.imagelist.common.ApiType;
 import ma.sdop.imagelist.common.BaseFragment;
+import ma.sdop.imagelist.common.MaConstants;
 import ma.sdop.imagelist.common.MaUtils;
 import ma.sdop.imagelist.common.recycler.DataBindAdapter;
 import ma.sdop.imagelist.common.recycler.DataBinder;
 import ma.sdop.imagelist.common.data.BaseData;
 import ma.sdop.imagelist.common.data.InstagramParameterData;
-import ma.sdop.imagelist.common.recycler.DividerItemDecoration;
 import ma.sdop.imagelist.web.dto.DtoBase;
 import ma.sdop.imagelist.web.dto.instagram.ItemDto;
 import ma.sdop.imagelist.web.dto.instagram.ItemsDto;
@@ -68,11 +68,10 @@ public class MaImageFragment extends BaseFragment {
         maImageAdapter = new MaImageAdapter(listItems);
         ma_image_list.setAdapter(maImageAdapter);
         ma_image_list.addOnScrollListener(onScrollListener);
-//        ma_image_list.addItemDecoration(new DividerItemDecoration(activity, R.drawable.simple_divider));
 
         switch (apiType) {
             case Instagram:
-                taskHandler = new TaskHandler.Builder(activity, ItemsDto.class)
+                taskHandler = new TaskHandler.Builder(activity)
                         .setApiType(ApiType.Instagram)
                         .setOnCompleteListener(onCompletedListener)
                         .setParameter(new InstagramParameterData("design", ""))
@@ -85,7 +84,7 @@ public class MaImageFragment extends BaseFragment {
 
     private TaskHandler taskHandler = null;
 
-    private BaseTask.OnCompletedListener onCompletedListener = new BaseTask.OnCompletedListener() {
+    private final BaseTask.OnCompletedListener onCompletedListener = new BaseTask.OnCompletedListener() {
         @Override
         public <T extends DtoBase> void onCompleted(boolean isSuccess, T result) {
             switch (apiType) {
@@ -100,7 +99,7 @@ public class MaImageFragment extends BaseFragment {
         }
     };
 
-    private View.OnClickListener onClickListener = new View.OnClickListener() {
+    private final View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
@@ -110,7 +109,7 @@ public class MaImageFragment extends BaseFragment {
         }
     };
 
-    private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+    private final RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
         private boolean lastItemVisibleFlag = false;
         private int firstVisibleItem, visibleItemCount, totalItemCount;
 
@@ -131,7 +130,7 @@ public class MaImageFragment extends BaseFragment {
         }
     };
 
-    private class MaImageAdapter extends DataBindAdapter {
+    private final class MaImageAdapter extends DataBindAdapter {
         private List<BaseData> imageItems;
 
         public MaImageAdapter(List<BaseData> imageItems) {
@@ -159,7 +158,7 @@ public class MaImageFragment extends BaseFragment {
         }
     }
 
-    private class MaImageBinder extends DataBinder<MaImageBinder.ViewHolder> {
+    private final class MaImageBinder extends DataBinder<MaImageBinder.ViewHolder> {
         MaImageBinder(DataBindAdapter dataBindAdapter) {
             super(dataBindAdapter);
         }
@@ -171,11 +170,26 @@ public class MaImageFragment extends BaseFragment {
         }
 
         @Override
-        public void bindViewHolder(MaImageBinder.ViewHolder holder, int position) {
+        public void bindViewHolder(MaImageBinder.ViewHolder holder, final int position) {
             BaseData item = (BaseData) dataBindAdapter.getItem(position);
             RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) holder.ma_image_linearlayout.getLayoutParams();
             layoutParams.height = getImageHeight(item.getWidth(), item.getHeight());
             holder.ma_image_linearlayout.setLayoutParams(layoutParams);
+
+            holder.ma_image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity.getReplaceBuilder(MaImageDetailFragment.class)
+//                            .addParameter(MaConstants.CURRENT_INDEX, position)
+//                            .addParameter(MaConstants.API_TYPE, apiType)
+//                            .addParameter(MaConstants.PARAMETERS, taskHandler.getParameters())
+//                            .addParameter(MaConstants.CONCRETE_ITEMS, taskHandler.getResults())
+                            .addParameter(MaConstants.CURRENT_INDEX, position)
+                            .addParameter(MaConstants.TASK_HANDLER, taskHandler)
+                            .replace(true);
+
+                }
+            });
 
             Log.d(TAG, "position : " + position);
 
@@ -193,7 +207,7 @@ public class MaImageFragment extends BaseFragment {
             return expectedHeight;
         }
 
-        class ViewHolder extends RecyclerView.ViewHolder {
+        final class ViewHolder extends RecyclerView.ViewHolder {
             final ImageView ma_image;
             final LinearLayout ma_image_linearlayout;
 

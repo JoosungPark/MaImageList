@@ -22,17 +22,21 @@ import ma.sdop.imagelist.web.dto.DtoBase;
 abstract public class BaseTask extends AsyncTask<Void, Void, Boolean> {
     protected Context context;
     protected WebWrapper webWrapper;
-    protected OnCompletedListener onCompletedListener;
+    protected List<OnCompletedListener> onCompletedListenerList = new ArrayList<>();
     protected Dialog progressDialog;
 
     public BaseTask(Context context, OnCompletedListener onCompletedListener) {
         this.context = context;
-        this.onCompletedListener = onCompletedListener;
+        addOnCompletedListener(onCompletedListener);
         webWrapper = new WebWrapper(WebConfig.server);
         progressDialog = new Dialog(context, R.style.SimpleDialog);
         progressDialog.setCancelable(false);
         progressDialog.addContentView(new ProgressBar(context), new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         progressDialog.show();
+    }
+
+    public void addOnCompletedListener(OnCompletedListener listener) {
+        onCompletedListenerList.add(listener);
     }
 
     public interface OnCompletedListener {

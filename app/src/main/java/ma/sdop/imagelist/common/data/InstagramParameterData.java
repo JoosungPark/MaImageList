@@ -28,4 +28,9 @@ public class InstagramParameterData extends ParameterBaseData {
     public void setMaxId(String maxId) {
         this.maxId = maxId;
     }
+
+    @Override
+    public boolean isNext() {
+        return maxId != null;
+    }
 }

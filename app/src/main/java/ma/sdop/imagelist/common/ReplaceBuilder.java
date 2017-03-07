@@ -3,6 +3,7 @@ package ma.sdop.imagelist.common;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.PowerManager;
 
 /**
@@ -64,9 +65,14 @@ public class ReplaceBuilder {
         return this;
     }
 
+    public ReplaceBuilder addParameter(String key, Object value) {
+        fragment.getParameters().add(key, value);
+        return this;
+    }
 
-    public static ReplaceBuilder getBuilder(BaseActivity activity, int parentsId, Class<? extends BaseFragment> fragmentClass){
-        return new ReplaceBuilder(activity, parentsId, fragmentClass);
+    public ReplaceBuilder addBundle(Bundle bundle) {
+        fragment.setArguments(bundle);
+        return this;
     }
 
     /**
@@ -79,5 +85,9 @@ public class ReplaceBuilder {
     public ReplaceBuilder setAllowingStateLoss(boolean isAllowingStateLoss) {
         this.isAllowingStateLoss = isAllowingStateLoss;
         return this;
+    }
+
+    public static ReplaceBuilder getBuilder(BaseActivity activity, int parentsId, Class<? extends BaseFragment> fragmentClass){
+        return new ReplaceBuilder(activity, parentsId, fragmentClass);
     }
 }

@@ -8,7 +8,6 @@ abstract public class BaseData {
     protected int width;
     protected int height;
     protected String imageUrl;
-    protected int current=0;
 
     public int getWidth() {
         return width;
@@ -32,13 +31,5 @@ abstract public class BaseData {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public int getCurrent() {
-        return current;
-    }
-
-    public void setCurrent(int current) {
-        this.current = current;
     }
 }

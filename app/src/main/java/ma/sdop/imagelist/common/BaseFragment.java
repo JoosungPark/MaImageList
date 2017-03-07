@@ -13,6 +13,7 @@ import android.view.View;
 public class BaseFragment extends Fragment {
     protected String TAG = getClass().getSimpleName();
     protected BaseActivity activity;
+    protected Store<?> parameters = new Store<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,5 +24,9 @@ public class BaseFragment extends Fragment {
 
     protected View findViewById(@IdRes int id) {
         return getView().findViewById(id);
+    }
+
+    protected Store<?> getParameters() {
+        return parameters;
     }
 }

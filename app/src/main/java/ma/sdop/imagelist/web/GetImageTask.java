@@ -60,7 +60,9 @@ public class GetImageTask extends BaseTask {
             else maxId = null;
         }
 
-        if ( onCompletedListener != null ) onCompletedListener.onCompleted(aBoolean == null ? false : aBoolean, results);
+        for ( OnCompletedListener listener : onCompletedListenerList ) {
+            listener.onCompleted(aBoolean == null ? false : aBoolean, results);
+        }
     }
 
     @Override
