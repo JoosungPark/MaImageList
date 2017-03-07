@@ -1,4 +1,4 @@
-package ma.sdop.imagelist.network;
+package ma.sdop.imagelist.web;
 
 import android.os.AsyncTask;
 import android.os.Build;
@@ -7,7 +7,7 @@ import android.os.Build;
  * Created by parkjoosung on 2017. 3. 6..
  */
 
-abstract public class BaseTask extends AsyncTask<Void, Void, Boolean> implements ImageTaskInterface {
+abstract public class BaseTask extends AsyncTask<Void, Void, Boolean> implements TaskHandler {
     protected WebWrapper webWrapper;
 
     public BaseTask() {

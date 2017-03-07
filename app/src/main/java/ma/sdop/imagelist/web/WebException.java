@@ -1,4 +1,4 @@
-package ma.sdop.imagelist.network;
+package ma.sdop.imagelist.web;
 
 import okhttp3.Response;
 

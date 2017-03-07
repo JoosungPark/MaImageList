@@ -1,8 +1,4 @@
-package ma.sdop.imagelist.network.response;
-
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+package ma.sdop.imagelist.web.response;
 
 import okhttp3.Response;
 

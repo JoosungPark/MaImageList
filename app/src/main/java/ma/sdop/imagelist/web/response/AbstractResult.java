@@ -1,4 +1,4 @@
-package ma.sdop.imagelist.network.response;
+package ma.sdop.imagelist.web.response;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -11,7 +11,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,7 +20,7 @@ import java.util.List;
  * Created by parkjoosung on 2017. 3. 6..
  */
 
-public class Result extends ResponseAdapter {
+public abstract class AbstractResult extends ResponseAdapter {
 
     public static JsonDeserializer<Date> dateDeserialize = new JsonDeserializer() {
         public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {

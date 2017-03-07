@@ -1,4 +1,4 @@
-package ma.sdop.imagelist.network;
+package ma.sdop.imagelist.web;
 
 import android.util.Log;
 
@@ -10,18 +10,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.util.HashMap;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.X509TrustManager;
-
-import ma.sdop.imagelist.network.response.MaResult;
-import ma.sdop.imagelist.network.response.ResponseAdapter;
+import ma.sdop.imagelist.web.response.MaResult;
+import ma.sdop.imagelist.web.response.ResponseAdapter;
 import okhttp3.Call;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
