@@ -1,4 +1,4 @@
-package ma.sdop.imagelist.dto;
+package ma.sdop.imagelist.web.dto;
 
 import java.io.Serializable;
 

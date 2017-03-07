@@ -1,4 +1,4 @@
-package ma.sdop.imagelist.dto.instagram;
+package ma.sdop.imagelist.web.dto.instagram;
 
 /**
  * Created by parkjoosung on 2017. 3. 6..

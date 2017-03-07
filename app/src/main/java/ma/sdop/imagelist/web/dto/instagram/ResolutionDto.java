@@ -1,6 +1,6 @@
-package ma.sdop.imagelist.dto.instagram;
+package ma.sdop.imagelist.web.dto.instagram;
 
-import ma.sdop.imagelist.dto.DtoBase;
+import ma.sdop.imagelist.web.dto.DtoBase;
 
 /**
  * Created by parkjoosung on 2017. 3. 6..

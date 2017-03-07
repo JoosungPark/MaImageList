@@ -2,9 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="sadfdsfasdfasdfdsads"
-        />
+        android:layout_margin="5dp">
+        <EditText
+            android:id="@+id/ma_image_input_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/ma_image_search_hint"/>
+        <ImageView
+            android:id="@+id/ma_image_search_button"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/search_icon"/>
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ma_image_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 </LinearLayout>

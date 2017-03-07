@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Ma Image List</string>
+
+    <string name="ma_image_search_hint">검색하려는 아이디를 입력해주세요.</string>
 </resources>

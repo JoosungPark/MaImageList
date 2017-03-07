@@ -39,5 +39,3 @@ captures/
 # Keystore files
 *.jks
 app/libs/
-app/src/main/java/ma/sdop/imagelist/network/
-app/src/main/res/drawable/
