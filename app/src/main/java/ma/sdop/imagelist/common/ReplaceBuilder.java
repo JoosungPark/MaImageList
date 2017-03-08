@@ -31,6 +31,7 @@ public class ReplaceBuilder {
 
     public void replace(boolean isHistory) {
         final FragmentTransaction transaction = activity.getFragmentManager().beginTransaction().replace(parentsId, fragment, tag);
+        activity.setFragmentTag(tag == null ? "default" : tag);
         if ( isHistory ) {
             if ( isAllowingStateLoss ) transaction.addToBackStack(stackName).commitAllowingStateLoss();
             else transaction.addToBackStack(stackName).commit();
@@ -66,12 +67,17 @@ public class ReplaceBuilder {
     }
 
     public ReplaceBuilder addParameter(String key, Object value) {
-        fragment.getParameters().add(key, value);
+        fragment.getParameters().put(key, value);
         return this;
     }
 
     public ReplaceBuilder addBundle(Bundle bundle) {
         fragment.setArguments(bundle);
+        return this;
+    }
+
+    public ReplaceBuilder setRequestCode(BaseFragment host, int requestCode) {
+        fragment.setTargetFragment(host, requestCode);
         return this;
     }
 

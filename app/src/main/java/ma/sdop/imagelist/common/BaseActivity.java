@@ -13,9 +13,13 @@ import ma.sdop.imagelist.R;
 
 public class BaseActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
-
     public FragmentManager getFragmentManager() {
         return fragmentManager;
+    }
+
+    private String fragmentTag;
+    public void setFragmentTag(String fragmentTag) {
+        this.fragmentTag = fragmentTag;
     }
 
     @Override
@@ -45,4 +49,21 @@ public class BaseActivity extends AppCompatActivity {
                 .setTag(BaseActivity.class.getSimpleName())
                 .setStackName(fragmentClass.getSimpleName());
     }
+
+    @Override
+    public void onBackPressed() {
+        if ( fragmentManager == null ) {
+            super.onBackPressed();
+        } else if ( fragmentManager.getBackStackEntryCount() > 0 ) {
+            BaseFragment fragment = getCurrentFragment();
+            fragment.onBackPressed();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    private BaseFragment getCurrentFragment() {
+        return (BaseFragment) fragmentManager.findFragmentByTag(fragmentTag);
+    }
+
 }

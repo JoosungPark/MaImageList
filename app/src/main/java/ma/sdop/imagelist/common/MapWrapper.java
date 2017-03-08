@@ -8,11 +8,11 @@ import java.util.LinkedHashMap;
  * Created by parkjoosung on 2017. 3. 7..
  */
 
-public class Store<Value> extends LinkedHashMap<String, Object> implements Comparable {
+public class MapWrapper<Value> extends LinkedHashMap<String, Object> implements Comparable {
     private String compareString = null;
     private boolean ASC = true;
 
-    private static final String STORE_TYPE = "ma.sdop.imagelist.common.Store";
+    private static final String STORE_TYPE = "ma.sdop.imagelist.common.MapWrapper";
 
     private enum Type {
         Object,
@@ -21,7 +21,7 @@ public class Store<Value> extends LinkedHashMap<String, Object> implements Compa
 
     private LinkedHashMap<String, String> types;
 
-    public Store(){
+    public MapWrapper(){
         super();
         types = new LinkedHashMap<>();
     }
@@ -119,13 +119,13 @@ public class Store<Value> extends LinkedHashMap<String, Object> implements Compa
         for(int i=0; i<keys.length; i++) this.put(keys[i], values[i]);
     }
 
-    public synchronized Store<Value> put(String key, Object value){
+    public synchronized MapWrapper<Value> put(String key, Value value){
         super.put(key, value);
         types.put(key, "java.lang.Object");
         return this;
     }
 
-    public synchronized Store<Value> put(String key, Object value, String type){
+    public synchronized MapWrapper<Value> put(String key, Object value, String type){
         super.put(key, value);
         types.put(key, type);
         return this;
@@ -150,7 +150,7 @@ public class Store<Value> extends LinkedHashMap<String, Object> implements Compa
         return values;
     }
 
-    public synchronized Store<Value> add(String key, Object value){
+    public synchronized MapWrapper<Value> add(String key, Value value){
         put(key, value);
         return this;
     }
@@ -162,7 +162,7 @@ public class Store<Value> extends LinkedHashMap<String, Object> implements Compa
     @Override
     public int compareTo(@NonNull Object another) {
         if(compareString==null) compareString=this.getString(this.getKeys()[0]);
-        if(ASC) return this.getString(compareString).compareTo(((Store)another).getString(compareString));
-        else return this.getString(compareString).compareTo(((Store)another).getString(compareString))*(-1);
+        if(ASC) return this.getString(compareString).compareTo(((MapWrapper)another).getString(compareString));
+        else return this.getString(compareString).compareTo(((MapWrapper)another).getString(compareString))*(-1);
     }
 }

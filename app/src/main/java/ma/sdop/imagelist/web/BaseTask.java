@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ma.sdop.imagelist.R;
+import ma.sdop.imagelist.common.MaUtils;
 import ma.sdop.imagelist.common.data.ParameterBaseData;
 import ma.sdop.imagelist.web.dto.DtoBase;
 
@@ -29,9 +30,7 @@ abstract public class BaseTask extends AsyncTask<Void, Void, Boolean> {
         this.context = context;
         addOnCompletedListener(onCompletedListener);
         webWrapper = new WebWrapper(WebConfig.server);
-        progressDialog = new Dialog(context, R.style.SimpleDialog);
-        progressDialog.setCancelable(false);
-        progressDialog.addContentView(new ProgressBar(context), new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        progressDialog = MaUtils.getProgressDialog(context);
         progressDialog.show();
     }
 

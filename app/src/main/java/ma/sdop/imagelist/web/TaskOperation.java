@@ -1,8 +1,9 @@
 package ma.sdop.imagelist.web;
 
+import android.support.annotation.StringRes;
+
 import java.util.List;
 
-import ma.sdop.imagelist.common.ApiType;
 import ma.sdop.imagelist.common.data.ParameterBaseData;
 import ma.sdop.imagelist.web.dto.DtoBase;
 
@@ -15,6 +16,6 @@ public interface TaskOperation {
     boolean next();
     List<DtoBase> getResults();
     ParameterBaseData getParameters();
-    ApiType getApiType();
+    @StringRes int getApiType();
     void setOnCompletedListener(BaseTask.OnCompletedListener listener);
 }

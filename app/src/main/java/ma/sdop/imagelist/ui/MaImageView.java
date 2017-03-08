@@ -1,12 +1,17 @@
 package ma.sdop.imagelist.ui;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import ma.sdop.imagelist.R;
+import ma.sdop.imagelist.common.MaUtils;
 import ma.sdop.imagelist.common.data.BaseData;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -38,7 +43,20 @@ public class MaImageView extends FrameLayout {
                 .fit()
                 .centerInside()
                 .into(ma_image);
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
 
         photoViewAttacher = new PhotoViewAttacher(ma_image);
+        photoViewAttacher.setMinimumScale((float)1);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+
+        photoViewAttacher.cleanup();
     }
 }

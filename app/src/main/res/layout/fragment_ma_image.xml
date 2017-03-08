@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:id="@+id/title_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp">
@@ -21,6 +22,16 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/ma_image_list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_linear_layout"
+        android:layout_alignParentBottom="true"/>
+    <Button
+        android:id="@+id/setting_button"
+        android:background="@drawable/setting"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+
+        />
+</RelativeLayout>

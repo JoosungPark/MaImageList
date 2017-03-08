@@ -2,13 +2,12 @@ package ma.sdop.imagelist.web;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import ma.sdop.imagelist.common.ApiType;
-import ma.sdop.imagelist.common.data.BaseData;
+import ma.sdop.imagelist.R;
 import ma.sdop.imagelist.common.data.InstagramParameterData;
 import ma.sdop.imagelist.common.data.ParameterBaseData;
 import ma.sdop.imagelist.web.dto.DtoBase;
@@ -21,11 +20,11 @@ public class TaskHandler implements TaskOperation {
     private BaseTask task;
     private List<DtoBase> cachedResult = new ArrayList<>();
     private Context context;
-    private ApiType apiType = ApiType.Instagram;
+    private @StringRes int apiType = R.string.api_instragram;
     private BaseTask.OnCompletedListener onCompletedListener;
     private ParameterBaseData parameter;
 
-    public TaskHandler(Context context, ApiType apiType, BaseTask.OnCompletedListener onCompletedListener, ParameterBaseData parameter, List<DtoBase> cachedResult) {
+    public TaskHandler(Context context, @StringRes int apiType, BaseTask.OnCompletedListener onCompletedListener, ParameterBaseData parameter, List<DtoBase> cachedResult) {
         this.context = context;
         this.apiType = apiType;
         this.onCompletedListener = onCompletedListener;
@@ -46,7 +45,7 @@ public class TaskHandler implements TaskOperation {
     private void createTask() {
         task = null;
         switch (apiType) {
-            case Instagram:
+            case R.string.api_instragram:
                 if ( parameter instanceof InstagramParameterData) {
                     InstagramParameterData instagramParameterData = (InstagramParameterData) parameter;
                     task = new GetImageTask(context, instagramParameterData.getUserId(),instagramParameterData.getMaxId(), onCompletedListener);
@@ -77,7 +76,7 @@ public class TaskHandler implements TaskOperation {
     }
 
     @Override
-    public ApiType getApiType() {
+    public @StringRes int getApiType() {
         return apiType;
     }
 
@@ -100,7 +99,7 @@ public class TaskHandler implements TaskOperation {
 
     public static class Builder {
         private Context context;
-        private ApiType apiType = ApiType.Instagram;
+        private @StringRes int apiType = R.string.api_instragram;
         private BaseTask.OnCompletedListener onCompletedListener;
         private ParameterBaseData parameter;
         private List<DtoBase> cachedResult;
@@ -109,7 +108,7 @@ public class TaskHandler implements TaskOperation {
             this.context = context;
         }
 
-        public Builder setApiType(ApiType apiType) {
+        public Builder setApiType(@StringRes int apiType) {
             this.apiType = apiType;
             return this;
         }
