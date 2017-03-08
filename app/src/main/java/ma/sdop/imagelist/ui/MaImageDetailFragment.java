@@ -1,6 +1,7 @@
 package ma.sdop.imagelist.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -17,6 +18,7 @@ import java.util.List;
 import ma.sdop.imagelist.R;
 import ma.sdop.imagelist.common.BaseFragment;
 import ma.sdop.imagelist.common.MaConstants;
+import ma.sdop.imagelist.common.MaUtils;
 import ma.sdop.imagelist.common.data.BaseData;
 import ma.sdop.imagelist.web.BaseTask;
 import ma.sdop.imagelist.web.TaskHandler;
@@ -36,7 +38,7 @@ public class MaImageDetailFragment extends BaseFragment {
     private TaskHandler taskHandler;
     private @StringRes int apiType = R.string.api_instragram;
     private List<MaImageView> subViews;
-
+    private List<BaseData> listItems;
     private boolean reloading = false;
 
     @Nullable
@@ -54,13 +56,14 @@ public class MaImageDetailFragment extends BaseFragment {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
-        Log.d(TAG, "onBackPressed");
+        setFragmentResult(new Intent().putExtra(MaConstants.CURRENT_INDEX, currentIndex));
     }
 
     private void initialize() {
-        currentIndex = (Integer) parameters.get(MaConstants.CURRENT_INDEX);
-        taskHandler = (TaskHandler) parameters.get(MaConstants.TASK_HANDLER);
+        currentIndex = (Integer) getParameters().get(MaConstants.CURRENT_INDEX);
+        taskHandler = (TaskHandler) getParameters().get(MaConstants.TASK_HANDLER);
+        listItems = (List<BaseData>) getParameters().get(MaConstants.LIST_ITEMS);
+
         taskHandler.setOnCompletedListener(onCompletedListener);
         apiType = taskHandler.getApiType();
 
@@ -68,8 +71,12 @@ public class MaImageDetailFragment extends BaseFragment {
 
         switch (apiType) {
             case R.string.api_instragram:
-                List<DtoBase> itemsDtoList = taskHandler.getResults();
-                for (DtoBase itemsDto : itemsDtoList ) addSubviews(itemsDto);
+                for ( BaseData data : listItems ) {
+                    if (data != null)  {
+                        subViews.add(new MaImageView(activity, data));
+                    }
+                }
+                break;
         }
 
         ma_image_viewpager = (ViewPager) findViewById(R.id.ma_image_viewpager);
@@ -81,19 +88,25 @@ public class MaImageDetailFragment extends BaseFragment {
     }
 
     private void addSubviews(DtoBase dtoBase) {
-        if ( dtoBase instanceof  ItemsDto ) {
+        if ( dtoBase instanceof ItemsDto ) {
             ItemsDto itemsDto = (ItemsDto) dtoBase;
+            if ( reloading && itemsDto.getItems().size() == 0 ) MaUtils.showToast(activity, R.string.err_no_more_image);
             for ( ItemDto itemDto : itemsDto.getItems() ) {
                 BaseData data = itemDto.getImageData();
-                if (data != null)  subViews.add(new MaImageView(activity, data));
+                if (data != null)  {
+                    subViews.add(new MaImageView(activity, data));
+                    listItems.add(data);
+                }
             }
         }
 
         if ( pagerAdapter != null && pagerAdapter.getCount() > currentIndex + 2 ) {
-            Log.e(TAG, "Complete reloading data.");
+            Log.d(TAG, "completed reloading data.");
             pagerAdapter.notifyDataSetChanged();
             if ( reloading ) ma_image_viewpager.setCurrentItem(currentIndex+1);
         }
+
+        reloading = false;
     }
 
     private final BaseTask.OnCompletedListener onCompletedListener = new BaseTask.OnCompletedListener() {
@@ -125,8 +138,8 @@ public class MaImageDetailFragment extends BaseFragment {
                 isDraggingAtLast = true;
             } else if ( isDraggingAtLast && state == ViewPager.SCROLL_STATE_IDLE ) {
                 Log.e(TAG, "reload data");
-                reloading = true;
-                taskHandler.next();
+                if ( taskHandler.next() ) reloading = true;
+                else MaUtils.showToast(activity, R.string.err_no_more_image);
             } else {
                 isDraggingAtLast = false;
                 reloading = false;

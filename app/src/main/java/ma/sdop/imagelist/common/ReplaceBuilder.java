@@ -81,6 +81,11 @@ public class ReplaceBuilder {
         return this;
     }
 
+    public ReplaceBuilder clearParameter() {
+        fragment.getParameters().clear();
+        return  this;
+    }
+
     /**
      * set allowing state loss.
      * if isAllowingStateLoss set ture, fragment is possible that exchange itself under other activity.

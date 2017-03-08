@@ -31,10 +31,11 @@ public class BaseFragment extends Fragment {
         return getView().findViewById(id);
     }
 
-    protected Map getParameters() {
+    protected Map<String, Object> getParameters() {
         return parameters;
     }
 
+    // it is used android default fragment design concept.
     protected void setFragmentResult() {
         if ( getTargetFragment() != null ) getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, null);
     }

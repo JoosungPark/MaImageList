@@ -1,6 +1,7 @@
 package ma.sdop.imagelist.web;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.json.JSONException;
 
@@ -12,6 +13,7 @@ import ma.sdop.imagelist.common.data.InstagramParameterData;
 import ma.sdop.imagelist.common.data.ParameterBaseData;
 import ma.sdop.imagelist.web.dto.DtoBase;
 import ma.sdop.imagelist.web.dto.instagram.ImageDto;
+import ma.sdop.imagelist.web.dto.instagram.ItemDto;
 import ma.sdop.imagelist.web.dto.instagram.ItemsDto;
 import ma.sdop.imagelist.web.dto.instagram.ResolutionDto;
 
@@ -56,8 +58,9 @@ public class GetImageTask extends BaseTask {
 
         if ( results != null  ) {
             moreAvailable = results.getMore_available();
-            if ( moreAvailable ) maxId = results.getLastImageUrl();
+            if ( moreAvailable ) maxId = results.getLastId();
             else maxId = null;
+            Log.i(TAG, "onPostExecute moreAvailable " + moreAvailable + " maxId " + maxId);
         }
 
         for ( OnCompletedListener listener : onCompletedListenerList ) {

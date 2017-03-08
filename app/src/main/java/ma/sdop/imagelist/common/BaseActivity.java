@@ -2,8 +2,14 @@ package ma.sdop.imagelist.common;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import ma.sdop.imagelist.R;
 
@@ -36,9 +42,7 @@ public class BaseActivity extends AppCompatActivity {
         T frag = null;
         try {
             frag = (T)fragmentClass.newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e ) {
             e.printStackTrace();
         }
         return (T) frag;
@@ -65,5 +69,4 @@ public class BaseActivity extends AppCompatActivity {
     private BaseFragment getCurrentFragment() {
         return (BaseFragment) fragmentManager.findFragmentByTag(fragmentTag);
     }
-
 }

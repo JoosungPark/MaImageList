@@ -42,14 +42,11 @@ public class ItemsDto extends DtoBase {
         this.more_available = more_available;
     }
 
-    public String getLastImageUrl() {
-        String result = null;
-        if ( items.size() > 0 ) {
-            ImageDto lastImage = items.get(items.size()-1).getImages();
-            ResolutionDto resolutionDto = lastImage == null ? null : lastImage.getStandard_resolution();
-            result = resolutionDto == null ? null : resolutionDto.getUrl();
+    public String getLastId() {
+        if ( items != null && items.size() > 0 ) {
+            return  items.get(items.size()-1).getId();
+        } else {
+            return null;
         }
-        return result;
     }
-
 }

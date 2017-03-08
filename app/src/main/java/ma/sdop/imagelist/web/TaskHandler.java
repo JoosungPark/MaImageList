@@ -93,7 +93,7 @@ public class TaskHandler implements TaskOperation {
     private BaseTask.OnCompletedListener cachedOnCompletedListener = new BaseTask.OnCompletedListener() {
         @Override
         public <T extends DtoBase> void onCompleted(boolean isSuccess, T result) {
-            cachedResult.add(result);
+            if ( result != null ) cachedResult.add(result);
         }
     };
 

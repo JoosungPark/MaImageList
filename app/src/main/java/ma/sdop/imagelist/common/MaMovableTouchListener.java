@@ -1,5 +1,7 @@
 package ma.sdop.imagelist.common;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,11 +27,6 @@ public class MaMovableTouchListener implements View.OnTouchListener {
     public MaMovableTouchListener(View target, int delta) {
         this(target);
         this.delta = delta;
-    }
-
-    private float getMaxValue(float value1, float value2) {
-        if ( value1 > value2 ) return value1;
-        else return value2;
     }
 
     @Override
@@ -60,7 +57,6 @@ public class MaMovableTouchListener implements View.OnTouchListener {
                 break;
             }
             case MotionEvent.ACTION_CANCEL:
-                break;
             case MotionEvent.ACTION_UP:
                 break;
         }

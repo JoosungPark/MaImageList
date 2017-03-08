@@ -21,6 +21,8 @@ import ma.sdop.imagelist.web.dto.DtoBase;
  */
 
 abstract public class BaseTask extends AsyncTask<Void, Void, Boolean> {
+    protected String TAG = getClass().getSimpleName();
+
     protected Context context;
     protected WebWrapper webWrapper;
     protected List<OnCompletedListener> onCompletedListenerList = new ArrayList<>();
@@ -50,5 +52,11 @@ abstract public class BaseTask extends AsyncTask<Void, Void, Boolean> {
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
         progressDialog.dismiss();
+    }
+
+    @Override
+    protected void onCancelled() {
+        super.onCancelled();
+        MaUtils.showToast(context, R.string.err_api_call);
     }
 }

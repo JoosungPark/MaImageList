@@ -1,7 +1,6 @@
 package ma.sdop.imagelist;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import ma.sdop.imagelist.common.BaseActivity;
 import ma.sdop.imagelist.common.DisableLogger;
@@ -17,6 +16,4 @@ public class MainActivity extends BaseActivity {
 
         getReplaceBuilder(MaImageFragment.class).replace(true);
     }
-
-
 }

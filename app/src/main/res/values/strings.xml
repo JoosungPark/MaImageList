@@ -5,4 +5,9 @@
 
     <string name="api_instragram">Instagram</string>
     <string name="api_n">N</string>
+
+    <string name="err_empty_user_id">검색하려는 사용자 아이디를 입력하세요.</string>
+    <string name="err_api_call">API 호출 도중 에러가 발생했습니다.</string>
+    <string name="err_empty_result">검색 결과가 없습니다.</string>
+    <string name="err_no_more_image">더 이상 검색된 이미지가 없습니다.</string>
 </resources>

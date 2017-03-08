@@ -10,6 +10,7 @@ import ma.sdop.imagelist.web.dto.DtoBase;
 
 public class ItemDto extends DtoBase {
     private ImageDto images;
+    private String id;
 
     public ImageDto getImages() {
         return images;
@@ -17,6 +18,14 @@ public class ItemDto extends DtoBase {
 
     public void setImages(ImageDto images) {
         this.images = images;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public BaseData getImageData() {
