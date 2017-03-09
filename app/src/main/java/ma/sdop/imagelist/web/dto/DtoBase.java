@@ -6,9 +6,6 @@ import java.util.List;
 
 import ma.sdop.imagelist.common.data.ImageData;
 
-/**
- * Created by parkjoosung on 2017. 3. 6..
- */
 public class DtoBase implements Serializable {
     public List<ImageData> getImageData() {
         return new ArrayList<>();

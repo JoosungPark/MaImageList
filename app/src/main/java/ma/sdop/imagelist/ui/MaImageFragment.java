@@ -36,21 +36,13 @@ import ma.sdop.imagelist.common.PickerDialog;
 import ma.sdop.imagelist.common.data.ImageData;
 import ma.sdop.imagelist.common.recycler.DataBindAdapter;
 import ma.sdop.imagelist.common.recycler.DataBinder;
-import ma.sdop.imagelist.web.dto.n.Item;
-import ma.sdop.imagelist.web.dto.n.Rss;
 import ma.sdop.imagelist.web.parameter.InstagramParameterData;
 import ma.sdop.imagelist.web.WebConfig;
 import ma.sdop.imagelist.web.dto.DtoBase;
-import ma.sdop.imagelist.web.dto.instagram.ItemDto;
-import ma.sdop.imagelist.web.dto.instagram.ItemsDto;
 import ma.sdop.imagelist.web.BaseTask;
 import ma.sdop.imagelist.web.TaskHandler;
 import ma.sdop.imagelist.web.parameter.NParameterData;
 import ma.sdop.imagelist.web.parameter.ParameterBaseData;
-
-/**
- * Created by parkjoosung on 2017. 3. 7..
- */
 
 public class MaImageFragment extends BaseFragment {
     private EditText ma_image_input_id;
@@ -102,9 +94,7 @@ public class MaImageFragment extends BaseFragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if ( requestCode == MaConstants.CODE.REQUEST_IMAGE_DETAIL && resultCode == Activity.RESULT_OK ) {
-            int position = data.getIntExtra(MaConstants.CURRENT_INDEX, currentPosition);
-            currentPosition = position;
-
+            currentPosition = data.getIntExtra(MaConstants.CURRENT_INDEX, currentPosition);
             Log.d(TAG, "onActivityResult currentPosition : " + currentPosition);
         }
     }
@@ -283,7 +273,7 @@ public class MaImageFragment extends BaseFragment {
     private final class MaImageAdapter extends DataBindAdapter {
         private List<ImageData> imageItems;
 
-        public MaImageAdapter(List<ImageData> imageItems) {
+        MaImageAdapter(List<ImageData> imageItems) {
             this.imageItems = imageItems;
         }
 
@@ -321,11 +311,10 @@ public class MaImageFragment extends BaseFragment {
 
         @Override
         public void bindViewHolder(MaImageBinder.ViewHolder holder, final int position) {
-            Log.d(TAG, "position : " + position);
             currentPosition = position;
             ImageData item = (ImageData) dataBindAdapter.getItem(position);
             RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) holder.ma_image_linearlayout.getLayoutParams();
-            layoutParams.height = getImageHeight(item.getWidth(), item.getHeight());
+            layoutParams.height = MaUtils.getImageHeight(activity, item.getWidth(), item.getHeight());
             holder.ma_image_linearlayout.setLayoutParams(layoutParams);
 
             holder.ma_image.setOnClickListener(new View.OnClickListener() {
@@ -346,13 +335,6 @@ public class MaImageFragment extends BaseFragment {
                     .fit()
                     .centerInside()
                     .into(holder.ma_image);
-        }
-
-        private int getImageHeight(int imageWidth, int imageHeight) {
-            int expectedWidth = MaUtils.getWindowWidth(activity);
-            int expectedHeight = expectedWidth * imageHeight / imageWidth;
-            Log.d(TAG, String.format("image width : %d, image height : %d, expectedWidth : %d, expectedHeight : %d", imageWidth, imageHeight, expectedWidth, expectedHeight));
-            return expectedHeight;
         }
 
         final class ViewHolder extends RecyclerView.ViewHolder {

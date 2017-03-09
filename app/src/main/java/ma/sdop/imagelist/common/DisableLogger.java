@@ -2,10 +2,6 @@ package ma.sdop.imagelist.common;
 
 import uk.co.senab.photoview.log.Logger;
 
-/**
- * Created by parkjoosung on 2017. 3. 8..
- */
-
 // disable log for PhotoView.
 public class DisableLogger implements Logger {
     @Override

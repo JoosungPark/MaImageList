@@ -3,10 +3,6 @@ package ma.sdop.imagelist.web.dto.instagram;
 import ma.sdop.imagelist.common.data.ImageData;
 import ma.sdop.imagelist.web.dto.DtoBase;
 
-/**
- * Created by parkjoosung on 2017. 3. 6..
- */
-
 public class ItemDto extends DtoBase {
     private ImageDto images;
     private String id;

@@ -1,13 +1,9 @@
 package ma.sdop.imagelist.web.dto.n;
 
 import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Root;
 
 import ma.sdop.imagelist.web.dto.DtoBase;
 
-/**
- * Created by parkjoosung on 2017. 3. 9..
- */
 @Element
 public class Item extends DtoBase {
     @Element private String title;

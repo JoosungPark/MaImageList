@@ -1,10 +1,6 @@
 package ma.sdop.imagelist.web.parameter;
 
-/**
- * Created by parkjoosung on 2017. 3. 9..
- */
-
-public class NParameterData extends ParameterBaseData{
+public class NParameterData extends ParameterBaseData {
     private String query;
 
     // count of wanted result.

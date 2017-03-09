@@ -1,9 +1,5 @@
 package ma.sdop.imagelist.common;
 
-/**
- * Created by parkjoosung on 2017. 3. 7..
- */
-
 public class MaConstants {
     private static final String prefix = "ma.sdop.image.list.";
 

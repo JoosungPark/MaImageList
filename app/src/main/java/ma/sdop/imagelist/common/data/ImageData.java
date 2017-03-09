@@ -1,9 +1,5 @@
 package ma.sdop.imagelist.common.data;
 
-/**
- * Created by parkjoosung on 2017. 3. 7..
- */
-
 public class ImageData {
     protected int width;
     protected int height;

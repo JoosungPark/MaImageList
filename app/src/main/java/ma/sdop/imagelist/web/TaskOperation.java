@@ -1,9 +1,12 @@
 package ma.sdop.imagelist.web;
 
 /**
- * Created by parkjoosung on 2017. 3. 7..
+ *
+ * TaskOperation.
+ *
+ * @author parkjoosung
+ *
  */
-
 public interface TaskOperation {
     void execute();
     boolean next();

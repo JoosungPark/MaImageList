@@ -6,10 +6,6 @@ import java.util.Locale;
 
 import ma.sdop.imagelist.R;
 
-/**
- * Created by parkjoosung on 2017. 3. 6..
- */
-
 public class WebConfig {
     public static final String HOST_INSTAGRAM = "https://www.instagram.com/";
     public static final String HOST_N = "https://www.naver.com";

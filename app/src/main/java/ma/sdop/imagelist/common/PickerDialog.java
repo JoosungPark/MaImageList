@@ -16,12 +16,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import ma.sdop.imagelist.R;
-import ma.sdop.imagelist.web.TaskHandler;
 
 /**
- * Created by parkjoosung on 2017. 3. 8..
+ * PickerDialog provide useful function.
+ * if you wanted to picker with any string array,
+ * just create with wanted string array!
+ *
+ * @author parkjoosung
  */
-
 public class PickerDialog extends Dialog {
     private ListView picker_list;
     private List<String> items;

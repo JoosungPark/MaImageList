@@ -6,10 +6,6 @@ import java.util.List;
 import ma.sdop.imagelist.common.data.ImageData;
 import ma.sdop.imagelist.web.dto.DtoBase;
 
-/**
- * Created by parkjoosung on 2017. 3. 6..
- */
-
 public class ItemsDto extends DtoBase {
     private String status;
     private boolean more_available;

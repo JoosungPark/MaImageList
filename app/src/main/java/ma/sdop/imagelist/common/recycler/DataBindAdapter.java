@@ -3,10 +3,6 @@ package ma.sdop.imagelist.common.recycler;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-/**
- * Created by parkjoosung on 2017. 3. 7..
- */
-
 abstract public class DataBindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

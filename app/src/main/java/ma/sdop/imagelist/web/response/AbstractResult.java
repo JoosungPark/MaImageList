@@ -19,9 +19,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by parkjoosung on 2017. 3. 6..
+ * data injection from json or xml to specific dto class.
+ *
+ * @author parkjoosung
  */
-
 public abstract class AbstractResult extends ResponseAdapter {
 
     public static JsonDeserializer<Date> dateDeserialize = new JsonDeserializer() {

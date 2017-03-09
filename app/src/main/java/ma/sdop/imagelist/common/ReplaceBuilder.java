@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.os.PowerManager;
 
 /**
- * Created by parkjoosung on 2017. 3. 7..
+ * ReplaceBuilder manage all transition of fragment at one activity.
+ * also, it is possible data transition between fragments by itself.
+ *
+ * @author parkjoosung
+ *
  */
-
 public class ReplaceBuilder {
     private BaseActivity activity;
     private BaseFragment fragment;

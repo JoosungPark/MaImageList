@@ -2,20 +2,19 @@ package ma.sdop.imagelist.web;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ma.sdop.imagelist.R;
-import ma.sdop.imagelist.web.parameter.InstagramParameterData;
 import ma.sdop.imagelist.web.parameter.ParameterBaseData;
 import ma.sdop.imagelist.web.dto.DtoBase;
 
 /**
- * Created by parkjoosung on 2017. 3. 6..
+ * TaskHandler manage several task based on BaseTask.
+ * it is possible to add specific api server if needs.
+ *
+ * @author parkjoosung
  */
-
 public class TaskHandler implements TaskOperation {
     private BaseTask task;
     private List<DtoBase> cachedResult = new ArrayList<>();

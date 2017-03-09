@@ -1,9 +1,6 @@
 package ma.sdop.imagelist.common;
 
-import android.animation.Animator;
-import android.animation.ValueAnimator;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +10,15 @@ import android.widget.RelativeLayout;
  * Created by parkjoosung on 2017. 3. 8..
  */
 
+
+/**
+ * i wanted to implement movable touch listener.
+ * however some problems still remain, put off that work.
+ *
+ * problem : certainly distinguish touch event between movable and click event.
+ *
+ * @author parkjoosung
+ */
 public class MaMovableTouchListener implements View.OnTouchListener {
     private static final float defaultDelta = 40;
 

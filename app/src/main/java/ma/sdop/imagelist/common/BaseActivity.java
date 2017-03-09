@@ -1,21 +1,10 @@
 package ma.sdop.imagelist.common;
 
-import android.app.Activity;
 import android.app.FragmentManager;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import ma.sdop.imagelist.R;
-
-/**
- * Created by parkjoosung on 2017. 3. 7..
- */
 
 public class BaseActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;

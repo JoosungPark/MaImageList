@@ -5,9 +5,8 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-
-// PhotoView를 ViewPager에서 사용하는 경우 발생하는 예외를 처리하기 위한 뷰페이저입니다.
-// 해당 소스는 아래 주석처럼, PhotoView 오픈 소스의 샘플에서 발최한 것입니다.
+// it is a custom ViewPager to be used with PhotoView.
+// as if be described at below comments, this source is referenced at PhotoView OpenSource.
 
 /**
  * Hacky fix for Issue #4 and

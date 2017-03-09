@@ -21,14 +21,7 @@ import ma.sdop.imagelist.common.MaUtils;
 import ma.sdop.imagelist.common.data.ImageData;
 import ma.sdop.imagelist.web.BaseTask;
 import ma.sdop.imagelist.web.TaskHandler;
-import ma.sdop.imagelist.web.WebConfig;
 import ma.sdop.imagelist.web.dto.DtoBase;
-import ma.sdop.imagelist.web.dto.instagram.ItemDto;
-import ma.sdop.imagelist.web.dto.instagram.ItemsDto;
-
-/**
- * Created by parkjoosung on 2017. 3. 7..
- */
 
 public class MaImageDetailFragment extends BaseFragment {
     private ViewPager ma_image_viewpager;
@@ -175,11 +168,6 @@ public class MaImageDetailFragment extends BaseFragment {
         public int getItemPosition(Object object) {
             if ( subViews.contains(object) ) return subViews.indexOf(object);
             else return POSITION_NONE;
-        }
-
-        public MaImageView getView(int position) {
-            if ( position >0 && position < subViews.size() ) return subViews.get(position);
-            else return null;
         }
     }
 }

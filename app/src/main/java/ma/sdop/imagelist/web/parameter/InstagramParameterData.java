@@ -1,9 +1,5 @@
 package ma.sdop.imagelist.web.parameter;
 
-/**
- * Created by parkjoosung on 2017. 3. 7..
- */
-
 public class InstagramParameterData extends ParameterBaseData {
     private String userId;
     private String maxId;

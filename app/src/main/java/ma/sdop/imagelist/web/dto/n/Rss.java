@@ -10,9 +10,6 @@ import java.util.List;
 import ma.sdop.imagelist.common.data.ImageData;
 import ma.sdop.imagelist.web.dto.DtoBase;
 
-/**
- * Created by parkjoosung on 2017. 3. 9..
- */
 @Root
 public class Rss extends DtoBase {
     @Element

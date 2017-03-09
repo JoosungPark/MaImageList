@@ -3,16 +3,10 @@ package ma.sdop.imagelist.web.dto.n;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementArray;
 import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import ma.sdop.imagelist.web.dto.DtoBase;
-
-/**
- * Created by parkjoosung on 2017. 3. 9..
- */
 
 @Element
 public class Channel extends DtoBase{

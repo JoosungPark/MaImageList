@@ -11,10 +11,6 @@ import android.view.View;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * Created by parkjoosung on 2017. 3. 7..
- */
-
 public class BaseFragment extends Fragment {
     protected String TAG = getClass().getSimpleName();
     protected BaseActivity activity;
@@ -23,7 +19,6 @@ public class BaseFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         activity = (BaseActivity) getActivity();
     }
 
@@ -35,7 +30,6 @@ public class BaseFragment extends Fragment {
         return parameters;
     }
 
-    // it is used android default fragment design concept.
     protected void setFragmentResult() {
         if ( getTargetFragment() != null ) getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, null);
     }

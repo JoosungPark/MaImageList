@@ -1,7 +1,6 @@
 package ma.sdop.imagelist.web;
 
 import android.content.Context;
-import android.support.annotation.StringRes;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -15,7 +14,6 @@ import java.net.URL;
 import java.util.HashMap;
 
 import ma.sdop.imagelist.R;
-import ma.sdop.imagelist.common.MaConstants;
 import ma.sdop.imagelist.web.response.MaResult;
 import ma.sdop.imagelist.web.response.ResponseAdapter;
 import okhttp3.Call;
@@ -25,9 +23,10 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Created by parkjoosung on 2017. 3. 6..
+ * just wrapper class about okhttp.
+ *
+ * @author parkjoosung
  */
-
 public class WebWrapper {
     private final Context context;
 

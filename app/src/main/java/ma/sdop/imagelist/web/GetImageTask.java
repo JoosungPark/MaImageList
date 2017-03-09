@@ -12,9 +12,10 @@ import ma.sdop.imagelist.web.dto.instagram.ItemsDto;
 import ma.sdop.imagelist.web.dto.n.Rss;
 
 /**
- * Created by parkjoosung on 2017. 3. 6..
+ * get image data items(json or xml format).
+ *
+ * @author parkjoosung
  */
-
 public class GetImageTask extends BaseTask {
     private DtoBase results;
     private boolean moreAvailable;

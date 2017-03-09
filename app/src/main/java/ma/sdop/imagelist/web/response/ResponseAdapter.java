@@ -2,10 +2,6 @@ package ma.sdop.imagelist.web.response;
 
 import okhttp3.Response;
 
-/**
- * Created by parkjoosung on 2017. 3. 6..
- */
-
 public class ResponseAdapter {
     protected Response response;
     protected String body;
