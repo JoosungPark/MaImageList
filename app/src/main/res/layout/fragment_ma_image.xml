@@ -6,13 +6,16 @@
         android:id="@+id/title_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        android:layout_margin="5dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
         <EditText
             android:id="@+id/ma_image_input_id"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/ma_image_search_hint"
+            android:hint="@string/ma_image_search_hint_instagram"
             android:maxLines="1"
             android:inputType="textUri"/>
         <ImageView
@@ -27,13 +30,38 @@
         android:layout_height="match_parent"
         android:layout_below="@id/title_linear_layout"
         android:layout_alignParentBottom="true"/>
+    <LinearLayout
+        android:id="@+id/description_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/setting_description_api"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="@string/description_instagram"
+            android:textColor="@android:color/holo_blue_dark"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_description"
+            android:textSize="20sp"
+            android:layout_marginTop="15dp"
+            />
+    </LinearLayout>
+
     <Button
         android:id="@+id/setting_button"
-        android:background="@drawable/setting"
-        android:layout_width="66dp"
-        android:layout_height="66dp"
-        android:layout_alignParentBottom="true"
+        android:background="@drawable/setting_empty"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
         android:layout_alignParentEnd="true"
-
+        android:layout_below="@id/title_linear_layout"
+        android:layout_marginEnd="5dp"
         />
 </RelativeLayout>

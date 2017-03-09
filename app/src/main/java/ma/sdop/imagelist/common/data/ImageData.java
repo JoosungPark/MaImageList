@@ -4,10 +4,16 @@ package ma.sdop.imagelist.common.data;
  * Created by parkjoosung on 2017. 3. 7..
  */
 
-abstract public class BaseData {
+public class ImageData {
     protected int width;
     protected int height;
     protected String imageUrl;
+
+    public ImageData(int width, int height, String imageUrl) {
+        this.width = width;
+        this.height = height;
+        this.imageUrl = imageUrl;
+    }
 
     public int getWidth() {
         return width;

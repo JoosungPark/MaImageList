@@ -10,6 +10,8 @@ import com.google.gson.JsonParseException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -27,6 +29,12 @@ public abstract class AbstractResult extends ResponseAdapter {
             return json == null?null:new Date(json.getAsLong());
         }
     };
+
+    public <Dto> Dto getXmlModel(Class<Dto> dtoClass) throws Exception {
+        String source = getBody();
+        Serializer serializer = new Persister();
+        return serializer.read(dtoClass, source);
+    }
 
     public <Dto> Dto getModel(Class<Dto> dtoClass, String... depths) throws JSONException {
         return this.fromJson(dtoClass, depths);

@@ -1,10 +1,20 @@
 <resources>
     <string name="app_name">Ma Image List</string>
 
-    <string name="ma_image_search_hint">검색하려는 아이디를 입력해주세요.</string>
+    <string name="ma_image_search_hint_instagram">검색하려는 아이디를 입력해주세요.</string>
+    <string name="ma_image_search_hint_n">검색하려는 키워드를 입력해주세요.</string>
 
     <string name="api_instragram">Instagram</string>
     <string name="api_n">N</string>
+
+    <string name="response_json">json</string>
+    <string name="response_xml">xml</string>
+
+    <string name="description_instagram">인스타그램 ID 검색</string>
+    <string name="description_n">N 이미지 검색</string>
+    <string name="setting_description">검색 API를 변경하려면\n우측 상단 설정 버튼을 누르세요.</string>
+
+    <string name="popup_title_select_api">API 선택</string>
 
     <string name="err_empty_user_id">검색하려는 사용자 아이디를 입력하세요.</string>
     <string name="err_api_call">API 호출 도중 에러가 발생했습니다.</string>

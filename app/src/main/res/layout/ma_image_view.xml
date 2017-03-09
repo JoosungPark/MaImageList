@@ -2,7 +2,18 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark">
+    <Button
+        android:id="@+id/button_close"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="35dp"
+        android:layout_height="42dp"
+        android:clickable="true"
+        android:background="@drawable/icon_close"
+        android:layout_margin="5dp"
+        android:layout_gravity="end"
+        />
     <uk.co.senab.photoview.PhotoView
         android:id="@+id/ma_image"
         android:layout_width="match_parent"

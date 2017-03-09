@@ -1,7 +1,6 @@
 package ma.sdop.imagelist.web.dto.instagram;
 
-import ma.sdop.imagelist.common.data.BaseData;
-import ma.sdop.imagelist.common.data.InstagramData;
+import ma.sdop.imagelist.common.data.ImageData;
 import ma.sdop.imagelist.web.dto.DtoBase;
 
 /**
@@ -28,12 +27,12 @@ public class ItemDto extends DtoBase {
         this.id = id;
     }
 
-    public BaseData getImageData() {
-        BaseData result = null;
+    public ImageData getConcreteImageData() {
+        ImageData result = null;
         if ( images != null ) {
             ResolutionDto resolutionDto = images.getStandard_resolution();
             if ( resolutionDto != null ) {
-                result = new InstagramData(resolutionDto.getUrl(), resolutionDto.getWidth(), resolutionDto.getHeight());
+                result = new ImageData(resolutionDto.getWidth(), resolutionDto.getHeight(), resolutionDto.getUrl());
             }
         }
 

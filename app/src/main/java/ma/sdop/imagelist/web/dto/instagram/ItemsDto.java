@@ -3,6 +3,7 @@ package ma.sdop.imagelist.web.dto.instagram;
 import java.util.ArrayList;
 import java.util.List;
 
+import ma.sdop.imagelist.common.data.ImageData;
 import ma.sdop.imagelist.web.dto.DtoBase;
 
 /**
@@ -48,5 +49,20 @@ public class ItemsDto extends DtoBase {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<ImageData> getImageData() {
+        List<ImageData> imageList = new ArrayList<>();
+        for ( ItemDto itemDto : items ) {
+            ImageData data = itemDto.getConcreteImageData();
+            if (data != null) imageList.add(data);
+        }
+        return imageList;
+    }
+
+    @Override
+    public int getCount() {
+        return items == null ? 0 : items.size();
     }
 }

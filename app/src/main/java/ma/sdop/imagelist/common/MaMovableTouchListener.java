@@ -2,6 +2,7 @@ package ma.sdop.imagelist.common;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,7 +14,7 @@ import android.widget.RelativeLayout;
  */
 
 public class MaMovableTouchListener implements View.OnTouchListener {
-    private static final float defaultDelta = 15;
+    private static final float defaultDelta = 40;
 
     private float preX;
     private float preY;
@@ -29,14 +30,27 @@ public class MaMovableTouchListener implements View.OnTouchListener {
         this.delta = delta;
     }
 
+    private final Handler handler = new Handler();
+    private Runnable convertFlag = new Runnable() {
+        @Override
+        public void run() {
+            flag = true;
+        }
+    };
+
+    private boolean flag = false;
+
     @Override
     public boolean onTouch(View view, MotionEvent event) {
+        boolean result = true;
         float currentX, currentY;
         int action = event.getAction();
+
         switch (action ) {
             case MotionEvent.ACTION_DOWN: {
                 preX = event.getX();
                 preY = event.getY();
+                flag = true;
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
@@ -58,8 +72,9 @@ public class MaMovableTouchListener implements View.OnTouchListener {
             }
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
+                if ( flag ) handler.postDelayed(convertFlag, 500);
                 break;
         }
-        return true;
+        return !flag;
     }
 }

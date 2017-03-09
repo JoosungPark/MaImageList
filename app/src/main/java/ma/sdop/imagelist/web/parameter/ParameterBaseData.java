@@ -1,4 +1,4 @@
-package ma.sdop.imagelist.common.data;
+package ma.sdop.imagelist.web.parameter;
 
 import java.io.Serializable;
 

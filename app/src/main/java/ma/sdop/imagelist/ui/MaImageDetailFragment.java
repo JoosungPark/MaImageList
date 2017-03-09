@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -19,9 +18,10 @@ import ma.sdop.imagelist.R;
 import ma.sdop.imagelist.common.BaseFragment;
 import ma.sdop.imagelist.common.MaConstants;
 import ma.sdop.imagelist.common.MaUtils;
-import ma.sdop.imagelist.common.data.BaseData;
+import ma.sdop.imagelist.common.data.ImageData;
 import ma.sdop.imagelist.web.BaseTask;
 import ma.sdop.imagelist.web.TaskHandler;
+import ma.sdop.imagelist.web.WebConfig;
 import ma.sdop.imagelist.web.dto.DtoBase;
 import ma.sdop.imagelist.web.dto.instagram.ItemDto;
 import ma.sdop.imagelist.web.dto.instagram.ItemsDto;
@@ -36,9 +36,8 @@ public class MaImageDetailFragment extends BaseFragment {
 
     private int currentIndex = 0;
     private TaskHandler taskHandler;
-    private @StringRes int apiType = R.string.api_instragram;
     private List<MaImageView> subViews;
-    private List<BaseData> listItems;
+    private List<ImageData> listItems;
     private boolean reloading = false;
 
     @Nullable
@@ -62,22 +61,12 @@ public class MaImageDetailFragment extends BaseFragment {
     private void initialize() {
         currentIndex = (Integer) getParameters().get(MaConstants.CURRENT_INDEX);
         taskHandler = (TaskHandler) getParameters().get(MaConstants.TASK_HANDLER);
-        listItems = (List<BaseData>) getParameters().get(MaConstants.LIST_ITEMS);
-
+        listItems = (List<ImageData>) getParameters().get(MaConstants.LIST_ITEMS);
         taskHandler.setOnCompletedListener(onCompletedListener);
-        apiType = taskHandler.getApiType();
 
         subViews = new ArrayList<>();
 
-        switch (apiType) {
-            case R.string.api_instragram:
-                for ( BaseData data : listItems ) {
-                    if (data != null)  {
-                        subViews.add(new MaImageView(activity, data));
-                    }
-                }
-                break;
-        }
+        for ( ImageData data : listItems ) if (data != null)  subViews.add(new MaImageView(activity, data, onClickListener));
 
         ma_image_viewpager = (ViewPager) findViewById(R.id.ma_image_viewpager);
 
@@ -88,16 +77,11 @@ public class MaImageDetailFragment extends BaseFragment {
     }
 
     private void addSubviews(DtoBase dtoBase) {
-        if ( dtoBase instanceof ItemsDto ) {
-            ItemsDto itemsDto = (ItemsDto) dtoBase;
-            if ( reloading && itemsDto.getItems().size() == 0 ) MaUtils.showToast(activity, R.string.err_no_more_image);
-            for ( ItemDto itemDto : itemsDto.getItems() ) {
-                BaseData data = itemDto.getImageData();
-                if (data != null)  {
-                    subViews.add(new MaImageView(activity, data));
-                    listItems.add(data);
-                }
-            }
+        if ( reloading && dtoBase.getImageData().size() == 0 ) MaUtils.showToast(activity, R.string.err_no_more_image);
+
+        for (ImageData imageData : dtoBase.getImageData() ) {
+            subViews.add(new MaImageView(activity, imageData, onClickListener));
+            listItems.add(imageData);
         }
 
         if ( pagerAdapter != null && pagerAdapter.getCount() > currentIndex + 2 ) {
@@ -109,13 +93,21 @@ public class MaImageDetailFragment extends BaseFragment {
         reloading = false;
     }
 
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.button_close:
+                    onBackPressed();
+                    break;
+            }
+        }
+    };
+
     private final BaseTask.OnCompletedListener onCompletedListener = new BaseTask.OnCompletedListener() {
         @Override
         public <T extends DtoBase> void onCompleted(boolean isSuccess, T result) {
-            switch (apiType) {
-                case R.string.api_instragram:
-                    addSubviews(result);
-            }
+            addSubviews(result);
         }
     };
 

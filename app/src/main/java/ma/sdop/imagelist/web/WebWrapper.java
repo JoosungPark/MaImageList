@@ -1,5 +1,7 @@
 package ma.sdop.imagelist.web;
 
+import android.content.Context;
+import android.support.annotation.StringRes;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -12,6 +14,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
+import ma.sdop.imagelist.R;
+import ma.sdop.imagelist.common.MaConstants;
 import ma.sdop.imagelist.web.response.MaResult;
 import ma.sdop.imagelist.web.response.ResponseAdapter;
 import okhttp3.Call;
@@ -25,10 +29,11 @@ import okhttp3.Response;
  */
 
 public class WebWrapper {
+    private final Context context;
+
     private OkHttpClient client;
     private String host;
     private String uri;
-    private String parameter = "";
 
     private HashMap<String, String> parameters = new HashMap();
     private HashMap<String, String> headers = new HashMap();
@@ -36,26 +41,57 @@ public class WebWrapper {
 
     private Call call;
 
-    public WebWrapper(String host) {
-        setHost(host);
+    public WebWrapper(Context context) {
+        this.context = context;
+        setHost();
         client = new OkHttpClient.Builder().build();
     }
 
     public WebWrapper setUri(String uri) {
-        if ( uri != null ) {
-            this.uri = uri;
+        if ( uri != null ) this.uri = uri;
+        return this;
+    }
+
+    public WebWrapper setHost() {
+        switch (WebConfig.apiType) {
+            case R.string.api_instragram:
+                this.host = WebConfig.HOST_INSTAGRAM;
+                break;
+            case R.string.api_n:
+                this.host = WebConfig.HOST_N;
+                break;
         }
         return this;
     }
 
-    public WebWrapper setHost(String host) {
-        if ( host != null ) {
-            this.host = host;
-        }
+    public WebWrapper addParameter(String key, String value) {
+        parameters.put(key, value);
         return this;
+    }
+
+    public WebWrapper addParameter(String key, int value) {
+        parameters.put(key, "" + value);
+        return this;
+    }
+
+    public WebWrapper addHeader(String key, String value) {
+        headers.put(key, value);
+        return this;
+    }
+
+    private void initHeader() {
+        switch (WebConfig.apiType) {
+            case R.string.api_instragram:
+                break;
+            case R.string.api_n:
+                addHeader(WebConfig.N.Header.KEY_CLIENT_ID, WebConfig.N.Header.VALUE_CLIENT_ID);
+                addHeader(WebConfig.N.Header.KEY_CLIENT_SECRET, WebConfig.N.Header.VALUDE_CLIENT_SECRET);
+                break;
+        }
     }
 
     public MaResult get() throws IOException, WebException, JSONException {
+        initHeader();
         return get(MaResult.class);
     }
 
@@ -83,7 +119,7 @@ public class WebWrapper {
     }
 
     public String getFullUrl() throws MalformedURLException {
-        return (new URL(new URL(this.host), this.uri)).toString() + this.parameter;
+        return (new URL(new URL(this.host), this.uri)).toString();
     }
 
     private String[] getParameterKeys() {
@@ -106,11 +142,10 @@ public class WebWrapper {
 
     private void addHeaderAll(Request.Builder reqestBuilder) {
         String[] headerKeys = getHeaderKeys();
-        String[] tempesKeys = headerKeys;
         int headerKeysLength = headerKeys.length;
 
         for(int index = 0; index < headerKeysLength; ++index) {
-            String key = tempesKeys[index];
+            String key = headerKeys[index];
             if(this.headers.get(key) != null) {
                 reqestBuilder.addHeader(key, headers.get(key));
             }
@@ -121,7 +156,6 @@ public class WebWrapper {
         headers.clear();
         parameters.clear();
         files.clear();
-        parameter = "";
     }
 
     private <ResultType extends ResponseAdapter> ResultType getResult(Response response, Class<ResultType> type) throws IOException {
