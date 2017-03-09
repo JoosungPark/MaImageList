@@ -320,6 +320,7 @@ public class MaImageFragment extends BaseFragment {
             holder.ma_image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    hideIme();
                     activity.getReplaceBuilder(MaImageDetailFragment.class)
                             .setRequestCode(MaImageFragment.this, MaConstants.CODE.REQUEST_IMAGE_DETAIL)
                             .addParameter(MaConstants.CURRENT_INDEX, position)
