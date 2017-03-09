@@ -3,7 +3,7 @@ Open API(instagram 및 N사)를 통해 이미지 로딩 및 상세 화면을 보
 
 ## 세부 내용
 #### 지원자명 : 박주성
-##### 개발환경
+#### 개발환경
 + OS : OS X 10.11
 + IDE : Android Studio 2.3
 + OpenSource
@@ -14,8 +14,8 @@ Open API(instagram 및 N사)를 통해 이미지 로딩 및 상세 화면을 보
  + Simple XML serialization(http://simple.sourceforge.net/) : XML to DTO deserialization.
  
 #### 실행환경 및 방법
-+ 실행환경 : Galaxy S7.
-+ 실행방법 : IDE를 통한 Run.
++ 실행환경 : Galaxy S7
++ 실행방법 : IDE를 통한 Run
 
 #### homework 수행에 대한 회고
 + 개발 진행 과정
