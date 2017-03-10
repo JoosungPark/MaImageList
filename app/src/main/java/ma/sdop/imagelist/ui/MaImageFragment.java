@@ -46,7 +46,6 @@ import ma.sdop.imagelist.web.parameter.ParameterBaseData;
 
 public class MaImageFragment extends BaseFragment {
     private EditText ma_image_input_id;
-    private Button setting_button;
     private TextView setting_description_api;
     private View description_layout;
 
@@ -70,13 +69,12 @@ public class MaImageFragment extends BaseFragment {
         ma_image_input_id = (EditText) findViewById(R.id.ma_image_input_id);
         ma_image_input_id.setOnEditorActionListener(editorActionListener);
         RecyclerView ma_image_list = (RecyclerView) findViewById(R.id.ma_image_list);
-        setting_button = (Button) findViewById(R.id.setting_button);
         setting_description_api = (TextView) findViewById(R.id.setting_description_api);
 
         description_layout = findViewById(R.id.description_layout);
 
         findViewById(R.id.ma_image_search_button).setOnClickListener(onClickListener);
-        setting_button.setOnClickListener(onClickListener);
+        findViewById(R.id.setting_button).setOnClickListener(onClickListener);
         linearLayoutManager = new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false);
         ma_image_list.setLayoutManager(linearLayoutManager);
         maImageAdapter = new MaImageAdapter(listItems);
@@ -146,7 +144,6 @@ public class MaImageFragment extends BaseFragment {
             for (ImageData imageData : result.getImageData()) listItems.add(imageData);
 
             reload = false;
-            setting_button.setBackgroundResource(R.drawable.setting);
             maImageAdapter.notifyDataSetChanged();
         }
     };
