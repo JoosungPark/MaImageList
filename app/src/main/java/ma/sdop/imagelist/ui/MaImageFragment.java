@@ -36,6 +36,7 @@ import ma.sdop.imagelist.common.PickerDialog;
 import ma.sdop.imagelist.common.data.ImageData;
 import ma.sdop.imagelist.common.recycler.DataBindAdapter;
 import ma.sdop.imagelist.common.recycler.DataBinder;
+import ma.sdop.imagelist.web.TaskOperation;
 import ma.sdop.imagelist.web.parameter.InstagramParameterData;
 import ma.sdop.imagelist.web.WebConfig;
 import ma.sdop.imagelist.web.dto.DtoBase;
@@ -115,7 +116,7 @@ public class MaImageFragment extends BaseFragment {
         }
     };
 
-    private TaskHandler taskHandler = null;
+    private TaskOperation taskHandler = null;
 
     private final BaseTask.OnCompletedListener onCompletedListener = new BaseTask.OnCompletedListener() {
         @Override

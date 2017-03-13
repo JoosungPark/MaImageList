@@ -17,17 +17,14 @@ import ma.sdop.imagelist.web.dto.DtoBase;
  */
 public class TaskHandler implements TaskOperation {
     private BaseTask task;
-    private List<DtoBase> cachedResult = new ArrayList<>();
     private Context context;
     private BaseTask.OnCompletedListener onCompletedListener;
     private ParameterBaseData parameter;
 
-    public TaskHandler(Context context, BaseTask.OnCompletedListener onCompletedListener, ParameterBaseData parameter, List<DtoBase> cachedResult) {
+    public TaskHandler(Context context, BaseTask.OnCompletedListener onCompletedListener, ParameterBaseData parameter) {
         this.context = context;
         this.onCompletedListener = onCompletedListener;
         this.parameter = parameter;
-        if ( cachedResult == null ) this.cachedResult = new ArrayList<>();
-        else this.cachedResult = cachedResult;
     }
 
     @Override
@@ -68,7 +65,6 @@ public class TaskHandler implements TaskOperation {
         private Context context;
         private BaseTask.OnCompletedListener onCompletedListener;
         private ParameterBaseData parameter;
-        private List<DtoBase> cachedResult;
 
         public Builder(@NonNull Context context) {
             this.context = context;
@@ -84,13 +80,8 @@ public class TaskHandler implements TaskOperation {
             return this;
         }
 
-        public Builder setCachedResult(List<DtoBase> cachedResult) {
-            this.cachedResult = cachedResult;
-            return this;
-        }
-
         public TaskHandler build() {
-            TaskHandler taskHandler = new TaskHandler(context, onCompletedListener, parameter, cachedResult);
+            TaskHandler taskHandler = new TaskHandler(context, onCompletedListener, parameter);
             return taskHandler;
         }
     }
