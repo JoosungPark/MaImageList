@@ -39,7 +39,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public ReplaceBuilder getReplaceBuilder(Class<? extends BaseFragment> fragmentClass) {
         return ReplaceBuilder.getBuilder(this, getHomeFragmentParentsId(), fragmentClass)
-                .setTag(BaseActivity.class.getSimpleName())
+                .setTag(fragmentTag == null ? BaseActivity.class.getSimpleName() : fragmentTag)
                 .setStackName(fragmentClass.getSimpleName());
     }
 
