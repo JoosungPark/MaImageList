@@ -34,9 +34,9 @@ public class WebWrapper {
     private String host;
     private String uri;
 
-    private HashMap<String, String> parameters = new HashMap();
-    private HashMap<String, String> headers = new HashMap();
-    private HashMap<String, File> files = new HashMap();
+    private HashMap<String, String> parameters = new HashMap<>();
+    private HashMap<String, String> headers = new HashMap<>();
+    private HashMap<String, File> files = new HashMap<>();
 
     private Call call;
 
