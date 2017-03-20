@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ma.sdop.imagelist.common.data.ImageData;
+import ma.sdop.imagelist.common.web.parameter.BaseParameter;
 
 /**
  * Created by parkjoosung on 2017. 3. 17..
@@ -13,4 +14,5 @@ import ma.sdop.imagelist.common.data.ImageData;
 public interface DtoOperation extends Serializable {
     List<ImageData> getImageData();
     int getCount();
+    boolean isNext(BaseParameter parameter);
 }

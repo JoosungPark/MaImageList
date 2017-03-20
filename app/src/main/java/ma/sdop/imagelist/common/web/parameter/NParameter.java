@@ -1,6 +1,6 @@
-package ma.sdop.imagelist.web.parameter;
+package ma.sdop.imagelist.common.web.parameter;
 
-public class NParameterData extends ParameterBaseData {
+public class NParameter extends BaseParameter {
     private String query;
 
     // count of wanted result.
@@ -12,7 +12,7 @@ public class NParameterData extends ParameterBaseData {
     // result count
     private int totalCount;
 
-    public NParameterData(String query, int display, int start) {
+    public NParameter(String query, int display, int start) {
         this.query = query;
         this.display = display;
         this.start = start;

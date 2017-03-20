@@ -1,25 +1,31 @@
-package ma.sdop.imagelist.web.dto.instagram;
+package ma.sdop.imagelist.common.web.dto.json.jackson;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ma.sdop.imagelist.common.data.ImageData;
-import ma.sdop.imagelist.web.dto.DtoBase;
+import ma.sdop.imagelist.common.web.dto.BaseDto;
+import ma.sdop.imagelist.common.web.parameter.BaseParameter;
+import ma.sdop.imagelist.common.web.parameter.InstagramParameter;
 
-public class ItemsDto extends DtoBase {
+/**
+ * Created by parkjoosung on 2017. 3. 20..
+ */
+
+public class ItemsBean extends BaseDto {
     private String status;
     private boolean more_available;
-    private List<ItemDto> items = new ArrayList<>();
+    private List<ItemBean> items = new ArrayList<>();
 
-    public void addItems(List<ItemDto> items) {
+    public void addItems(List<ItemBean> items) {
         this.items.addAll(items);
     }
 
-    public List<ItemDto> getItems() {
+    public List<ItemBean> getItems() {
         return items;
     }
 
-    public void setItems(List<ItemDto> items) {
+    public void setItems(List<ItemBean> items) {
         this.items = items;
     }
 
@@ -50,7 +56,7 @@ public class ItemsDto extends DtoBase {
     @Override
     public List<ImageData> getImageData() {
         List<ImageData> imageList = new ArrayList<>();
-        for ( ItemDto itemDto : items ) {
+        for ( ItemBean itemDto : items ) {
             ImageData data = itemDto.getConcreteImageData();
             if (data != null) imageList.add(data);
         }
@@ -60,5 +66,15 @@ public class ItemsDto extends DtoBase {
     @Override
     public int getCount() {
         return items == null ? 0 : items.size();
+    }
+
+    @Override
+    public boolean isNext(BaseParameter parameter) {
+        InstagramParameter parameterData = (InstagramParameter) parameter;
+        String maxId = getLastId();
+        if ( more_available ) parameterData.setMaxId(maxId);
+        else parameterData.setMaxId(null);
+
+        return more_available;
     }
 }

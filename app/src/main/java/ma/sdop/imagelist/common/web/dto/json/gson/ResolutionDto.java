@@ -1,8 +1,12 @@
-package ma.sdop.imagelist.web.dto.instagram;
+package ma.sdop.imagelist.common.web.dto.json.gson;
 
-import ma.sdop.imagelist.web.dto.DtoBase;
+import ma.sdop.imagelist.common.web.dto.BaseDto;
 
-public class ResolutionDto extends DtoBase {
+/**
+ * Created by parkjoosung on 2017. 3. 20..
+ */
+
+public class ResolutionDto extends BaseDto {
     private int width;
     private int height;
     private String url;

@@ -6,13 +6,8 @@ import android.os.AsyncTask;
 
 import ma.sdop.imagelist.R;
 import ma.sdop.imagelist.common.MaUtils;
-import ma.sdop.imagelist.web.WebConfig;
-import ma.sdop.imagelist.web.dto.DtoBase;
-import ma.sdop.imagelist.web.parameter.ParameterBaseData;
-
-/**
- * Created by parkjoosung on 2017. 3. 6..
- */
+import ma.sdop.imagelist.common.web.dto.BaseDto;
+import ma.sdop.imagelist.common.web.parameter.BaseParameter;
 
 abstract public class BaseTask extends AsyncTask<Void, Void, Boolean> {
     protected String TAG = getClass().getSimpleName();
@@ -29,11 +24,11 @@ abstract public class BaseTask extends AsyncTask<Void, Void, Boolean> {
     }
 
     public interface OnCompletedListener {
-        <T extends DtoBase> void onCompleted(boolean isSuccess, T result);
+        <T extends BaseDto> void onCompleted(boolean isSuccess, T result);
     }
 
     public abstract boolean isNext();
-    public abstract ParameterBaseData getNextParameter();
+    public abstract BaseParameter getNextParameter();
 
     @Override
     protected void onPreExecute() {

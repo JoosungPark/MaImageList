@@ -1,6 +1,8 @@
-package ma.sdop.imagelist.web.dto.instagram;
+package ma.sdop.imagelist.common.web.dto.json.gson;
 
-public class ImageDto {
+import ma.sdop.imagelist.common.web.dto.BaseDto;
+
+public class ImageDto extends BaseDto {
     private ResolutionDto standard_resolution;
     private ResolutionDto thumbnail;
     private ResolutionDto low_resolution;

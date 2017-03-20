@@ -1,11 +1,11 @@
-package ma.sdop.imagelist.web.dto.n;
+package ma.sdop.imagelist.common.web.dto.xml.simple;
 
 import org.simpleframework.xml.Element;
 
-import ma.sdop.imagelist.web.dto.DtoBase;
+import ma.sdop.imagelist.common.web.dto.BaseDto;
 
 @Element
-public class Item extends DtoBase {
+public class Item extends BaseDto {
     @Element private String title;
 
     @Element private String link;

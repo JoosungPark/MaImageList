@@ -38,11 +38,18 @@ import ma.sdop.imagelist.common.recycler.DataBinder;
 import ma.sdop.imagelist.common.web.BaseTask;
 import ma.sdop.imagelist.common.web.TaskHandler;
 import ma.sdop.imagelist.common.web.TaskOperation;
-import ma.sdop.imagelist.web.parameter.InstagramParameterData;
-import ma.sdop.imagelist.web.WebConfig;
-import ma.sdop.imagelist.web.dto.DtoBase;
-import ma.sdop.imagelist.web.parameter.NParameterData;
-import ma.sdop.imagelist.web.parameter.ParameterBaseData;
+import ma.sdop.imagelist.common.web.WebConfig;
+import ma.sdop.imagelist.common.web.WebWrapper;
+import ma.sdop.imagelist.common.web.dto.BaseDto;
+import ma.sdop.imagelist.common.web.dto.json.gson.ItemsDto;
+import ma.sdop.imagelist.common.web.dto.json.jackson.ItemsBean;
+import ma.sdop.imagelist.common.web.dto.xml.simple.Rss;
+import ma.sdop.imagelist.common.web.operator.HttpOperator;
+import ma.sdop.imagelist.common.web.operator.json.GsonJsonOperator;
+import ma.sdop.imagelist.common.web.operator.json.JacksonJsonOperator;
+import ma.sdop.imagelist.common.web.operator.xml.SimpleXmlOperator;
+import ma.sdop.imagelist.common.web.parameter.InstagramParameter;
+import ma.sdop.imagelist.common.web.parameter.NParameter;
 
 public class MaImageFragment extends BaseFragment {
     private EditText ma_image_input_id;
@@ -119,7 +126,7 @@ public class MaImageFragment extends BaseFragment {
 
     private final BaseTask.OnCompletedListener onCompletedListener = new BaseTask.OnCompletedListener() {
         @Override
-        public <T extends DtoBase> void onCompleted(boolean isSuccess, T result) {
+        public <T extends BaseDto> void onCompleted(boolean isSuccess, T result) {
             if ( result == null ) {
                 @StringRes int wantedId;
                 if ( reload ) {
@@ -177,27 +184,81 @@ public class MaImageFragment extends BaseFragment {
 
         hideIme();
 
-        ParameterBaseData parameter = null;
-        @StringRes int responseType = R.string.response_json;
-
         switch (WebConfig.apiType) {
             case R.string.api_n:
-                parameter = new NParameterData(userId, searchCount, 1);
-                responseType = R.string.response_xml;
+                onSearchN(userId);
                 break;
             case R.string.api_instragram:
-                parameter = new InstagramParameterData(userId, "");
+                onSearchInstagram(userId);
                 break;
         }
+    }
 
-        WebConfig.responseType = responseType;
+    private void onSearchN(String keyword) {
+        NParameter nParameter = new NParameter(keyword, searchCount, 1);
 
-        taskHandler = new TaskHandler.Builder(activity)
-                .setOnCompleteListener(onCompletedListener)
-                .setParameter(parameter)
+        WebWrapper webWrapper = new WebWrapper(activity, WebConfig.HOST_N)
+                .setUri(WebConfig.N.API)
+                .addHeader(WebConfig.N.Header.KEY_CLIENT_ID, WebConfig.N.Header.VALUE_CLIENT_ID)
+                .addHeader(WebConfig.N.Header.KEY_CLIENT_SECRET, WebConfig.N.Header.VALUDE_CLIENT_SECRET)
+                .addParameter(WebConfig.N.Parameter.Query, nParameter.getQuery())
+                .addParameter(WebConfig.N.Parameter.Display, nParameter.getDisplay())
+                .setOperator(new SimpleXmlOperator());
+
+        taskHandler = new TaskHandler.Builder<>(activity, Rss.class)
+                .setWebWrapper(webWrapper)
+                .setParameter(nParameter)
+                .setOnCompletedListener(onCompletedListener)
                 .build();
 
-        if (taskHandler != null ) taskHandler.execute();
+        taskHandler.execute();
+    }
+
+    private Class<? extends BaseDto> getDto() {
+        return Rss.class;
+    }
+
+    private void onSearchInstagram(String userId) {
+        InstagramParameter instagramParameter = new InstagramParameter(userId, "");
+        WebWrapper webWrapper = new WebWrapper(activity, WebConfig.HOST_INSTAGRAM)
+                .setUri(WebConfig.INSTAGRAM.getApi(instagramParameter.getUserId(), instagramParameter.getMaxId()))
+                .setOperator(getOperator());
+
+        taskHandler = new TaskHandler.Builder<>(activity, getResultType())
+                        .setWebWrapper(webWrapper)
+                .setParameter(instagramParameter)
+                .setOnCompletedListener(onCompletedListener)
+                .build();
+
+        taskHandler.execute();
+    }
+
+    private Class<? extends BaseDto> getResultType() {
+        switch (operatorType) {
+            case Gson:
+                return ItemsDto.class;
+            case Jackson:
+                return ItemsBean.class;
+            default:
+                return ItemsDto.class;
+        }
+    }
+
+    private JsonOperatorType operatorType = JsonOperatorType.Gson;
+
+    enum JsonOperatorType {
+        Gson, Jackson
+    }
+
+    private HttpOperator getOperator() {
+        switch (operatorType) {
+            case Gson:
+                return new GsonJsonOperator();
+            case Jackson:
+                return new JacksonJsonOperator();
+            default:
+                return new GsonJsonOperator();
+        }
     }
 
     private void hideIme() {

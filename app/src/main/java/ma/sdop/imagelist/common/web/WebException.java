@@ -1,10 +1,6 @@
-package ma.sdop.imagelist.web;
+package ma.sdop.imagelist.common.web;
 
 import okhttp3.Response;
-
-/**
- * Created by parkjoosung on 2017. 3. 6..
- */
 
 public class WebException extends Exception {
     public Response response;

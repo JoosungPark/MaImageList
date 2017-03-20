@@ -1,10 +1,10 @@
-package ma.sdop.imagelist.web.parameter;
+package ma.sdop.imagelist.common.web.parameter;
 
-public class InstagramParameterData extends ParameterBaseData {
+public class InstagramParameter extends BaseParameter {
     private String userId;
     private String maxId;
 
-    public InstagramParameterData(String userId, String maxId) {
+    public InstagramParameter(String userId, String maxId) {
         this.userId = userId;
         this.maxId = maxId;
     }

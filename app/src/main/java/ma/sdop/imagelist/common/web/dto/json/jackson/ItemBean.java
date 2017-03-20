@@ -1,17 +1,21 @@
-package ma.sdop.imagelist.web.dto.instagram;
+package ma.sdop.imagelist.common.web.dto.json.jackson;
 
 import ma.sdop.imagelist.common.data.ImageData;
-import ma.sdop.imagelist.web.dto.DtoBase;
+import ma.sdop.imagelist.common.web.dto.BaseDto;
 
-public class ItemDto extends DtoBase {
-    private ImageDto images;
+/**
+ * Created by parkjoosung on 2017. 3. 20..
+ */
+
+public class ItemBean extends BaseDto {
+    private ImageBean images;
     private String id;
 
-    public ImageDto getImages() {
+    public ImageBean getImages() {
         return images;
     }
 
-    public void setImages(ImageDto images) {
+    public void setImages(ImageBean images) {
         this.images = images;
     }
 
@@ -26,7 +30,7 @@ public class ItemDto extends DtoBase {
     public ImageData getConcreteImageData() {
         ImageData result = null;
         if ( images != null ) {
-            ResolutionDto resolutionDto = images.getStandard_resolution();
+            ResolutionBean resolutionDto = images.getStandard_resolution();
             if ( resolutionDto != null ) {
                 result = new ImageData(resolutionDto.getWidth(), resolutionDto.getHeight(), resolutionDto.getUrl());
             }

@@ -15,16 +15,11 @@ import java.util.HashMap;
 import ma.sdop.imagelist.common.web.operator.HttpOperator;
 import ma.sdop.imagelist.common.web.operator.json.GsonJsonOperator;
 import ma.sdop.imagelist.common.web.result.ResultAdapter;
-import ma.sdop.imagelist.web.WebException;
 import okhttp3.Call;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-/**
- * Created by parkjoosung on 2017. 3. 17..
- */
 
 public class WebWrapper {
     private final Context context;

@@ -1,4 +1,4 @@
-package ma.sdop.imagelist.web.dto.n;
+package ma.sdop.imagelist.common.web.dto.xml.simple;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ma.sdop.imagelist.common.data.ImageData;
-import ma.sdop.imagelist.web.dto.DtoBase;
+import ma.sdop.imagelist.common.web.dto.BaseDto;
+import ma.sdop.imagelist.common.web.parameter.BaseParameter;
+import ma.sdop.imagelist.common.web.parameter.NParameter;
 
 @Root
-public class Rss extends DtoBase {
+public class Rss extends BaseDto {
     @Element
     private Channel channel;
 
@@ -49,5 +51,14 @@ public class Rss extends DtoBase {
         int count=0;
         if ( channel != null ) count = channel.getDisplay();
         return count;
+    }
+
+    @Override
+    public boolean isNext(BaseParameter parameter) {
+        NParameter parameterData = (NParameter) parameter;
+        parameterData.setTotalCount(getTotal());
+        parameterData.setNextStart();
+
+        return parameterData.isNext();
     }
 }

@@ -1,55 +1,28 @@
 package ma.sdop.imagelist.common.web;
 
 import android.content.Context;
-import android.util.Log;
 
-import ma.sdop.imagelist.R;
-import ma.sdop.imagelist.web.WebConfig;
-import ma.sdop.imagelist.web.dto.DtoBase;
-import ma.sdop.imagelist.web.dto.instagram.ItemsDto;
-import ma.sdop.imagelist.web.dto.n.Rss;
-import ma.sdop.imagelist.web.parameter.InstagramParameterData;
-import ma.sdop.imagelist.web.parameter.NParameterData;
-import ma.sdop.imagelist.web.parameter.ParameterBaseData;
+import ma.sdop.imagelist.common.web.dto.BaseDto;
+import ma.sdop.imagelist.common.web.parameter.BaseParameter;
 
-/**
- * Created by parkjoosung on 2017. 3. 17..
- */
+class GetImageTask<ResultType extends BaseDto>  extends BaseTask {
+    private ResultType results;
+    private boolean moreAvailable = false;
+    private BaseParameter parameter;
 
-public class GetImageTask extends BaseTask {
-    private DtoBase results;
-    private boolean moreAvailable;
-    private ParameterBaseData parameter;
+    private Class<ResultType> resultType;
 
-    public GetImageTask(Context context, ParameterBaseData parameter, OnCompletedListener onCompletedListener) {
+    GetImageTask(Context context, BaseParameter parameter, OnCompletedListener onCompletedListener, WebWrapper webWrapper, Class<ResultType> resultType) {
         super(context, onCompletedListener);
         this.parameter = parameter;
-        webWrapper = new WebWrapper(context, getHost());
-        setUrl();
-    }
-
-    private void setUrl() {
-        if (WebConfig.apiType == R.string.api_n ) {
-            webWrapper.setUri(WebConfig.N.API);
-            NParameterData parameterData = (NParameterData) parameter;
-            webWrapper.addParameter(WebConfig.N.Parameter.Query, parameterData.getQuery())
-                    .addParameter(WebConfig.N.Parameter.Display, parameterData.getDisplay());
-            int start = parameterData.getStart();
-            if ( start != 0 ) webWrapper.addParameter(WebConfig.N.Parameter.Start, start);
-        } else if (WebConfig.apiType == R.string.api_instragram && parameter instanceof InstagramParameterData) {
-            InstagramParameterData parameterData = (InstagramParameterData) parameter;
-            webWrapper.setUri(WebConfig.INSTAGRAM.getApi(parameterData.getUserId(), parameterData.getMaxId()));
-        }
+        this.webWrapper = webWrapper;
+        this.resultType = resultType;
     }
 
     @Override
     protected Boolean doInBackground(Void... params) {
         try {
-            if (WebConfig.apiType == R.string.api_n) {
-                results = webWrapper.get().getDto(Rss.class);
-            } else {
-                results = webWrapper.get().getDto(ItemsDto.class);
-            }
+            results = webWrapper.get().getDto(resultType);
         } catch ( Exception e ) {
             e.printStackTrace();
         }
@@ -60,31 +33,7 @@ public class GetImageTask extends BaseTask {
     @Override
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
-
-        if ( results != null  ) {
-            if (WebConfig.apiType == R.string.api_n) {
-                Rss concreteResults = (Rss) results;
-                NParameterData parameterData = (NParameterData) parameter;
-                parameterData.setTotalCount(concreteResults.getTotal());
-                moreAvailable = parameterData.isNext();
-                parameterData.setNextStart();
-
-                Log.i(TAG, "total : " + concreteResults.getTotal());
-                Log.i(TAG, "display : " + concreteResults.getChannel().getDisplay());
-                Log.i(TAG, "start : " + concreteResults.getChannel().getStart());
-            } else {
-                ItemsDto concreteResults = (ItemsDto) results;
-                moreAvailable = concreteResults.getMore_available();
-                InstagramParameterData parameterData = (InstagramParameterData) parameter;
-                String maxId = concreteResults.getLastId();
-
-                if ( moreAvailable ) parameterData.setMaxId(maxId);
-                else parameterData.setMaxId(null);
-
-                Log.i(TAG, "onPostExecute moreAvailable " + moreAvailable + " maxId " + maxId);
-            }
-        }
-
+        if ( results != null ) moreAvailable = results.isNext(parameter);
         if ( onCompletedListener != null ) onCompletedListener.onCompleted(aBoolean == null ? false : aBoolean, results);
     }
 
@@ -94,7 +43,7 @@ public class GetImageTask extends BaseTask {
     }
 
     @Override
-    public ParameterBaseData getNextParameter() {
+    public BaseParameter getNextParameter() {
         return parameter;
     }
 }

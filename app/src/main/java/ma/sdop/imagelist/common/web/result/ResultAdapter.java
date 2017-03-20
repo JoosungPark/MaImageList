@@ -6,10 +6,6 @@ import ma.sdop.imagelist.common.web.dto.BaseDto;
 import ma.sdop.imagelist.common.web.operator.HttpOperator;
 import okhttp3.Response;
 
-/**
- * Created by parkjoosung on 2017. 3. 17..
- */
-
 public class ResultAdapter {
     private Response response;
     private String body;
@@ -39,11 +35,11 @@ public class ResultAdapter {
         this.operator = operator;
     }
 
-    public <Dto> Dto getDto(Class<Dto> dtoClass, String... depths) throws Exception {
+    public <Dto extends BaseDto> Dto getDto(Class<Dto> dtoClass, String... depths) throws Exception {
         return operator.getDto(body, dtoClass, depths);
     }
 
-    public <Dto> List<Dto> getDtoList(Class<Dto> type) throws Exception {
+    public <Dto extends BaseDto> List<Dto> getDtoList(Class<Dto> type) throws Exception {
         return operator.getDtoList(body, type);
     }
 }

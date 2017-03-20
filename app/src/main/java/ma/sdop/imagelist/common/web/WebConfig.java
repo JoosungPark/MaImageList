@@ -1,4 +1,4 @@
-package ma.sdop.imagelist.web;
+package ma.sdop.imagelist.common.web;
 
 import android.support.annotation.StringRes;
 
