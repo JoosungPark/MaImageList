@@ -5,7 +5,7 @@ It is provide image list and concrete image view that user searched. It use open
 ![Alt text](/screenShot.png)
 + This app is a just simple app using image open api from instagram or naver.
 + Default open api is instagram. you can choose another one by select setting button like #4 image.
-+ And you can choose json deserialization options likewise below code block. getOperator return 'concreted DTO' and getOperator return appropriate HttpOperator. it getOpeator() and getResultType() 
++ And you can choose json deserialization options likewise below code block. getOperator return 'concreted DTO' and getOperator return appropriate concreted HttpOperator. 
 ```
     WebWrapper webWrapper = new WebWrapper(activity, WebConfig.HOST_INSTAGRAM)
             .setUri(WebConfig.INSTAGRAM.getApi(instagramParameter.getUserId(), instagramParameter.getMaxId()))
