@@ -1,12 +1,10 @@
 package ma.sdop.imagelist.common.web.dto.json.jackson;
 
-import ma.sdop.imagelist.common.web.dto.BaseDto;
-
 /**
  * Created by parkjoosung on 2017. 3. 20..
  */
 
-public class ImageBean extends BaseDto {
+public class ImageBean {
     private ResolutionBean standard_resolution;
     private ResolutionBean thumbnail;
     private ResolutionBean low_resolution;

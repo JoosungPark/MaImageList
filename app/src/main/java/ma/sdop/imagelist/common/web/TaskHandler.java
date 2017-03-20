@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import ma.sdop.imagelist.R;
-import ma.sdop.imagelist.common.web.dto.BaseDto;
+import ma.sdop.imagelist.common.web.dto.ImageDtoOperation;
 import ma.sdop.imagelist.common.web.parameter.BaseParameter;
 import ma.sdop.imagelist.common.web.parameter.InstagramParameter;
 
@@ -15,7 +15,7 @@ import ma.sdop.imagelist.common.web.parameter.InstagramParameter;
  *
  * @author parkjoosung
  */
-public class TaskHandler<ResultType extends BaseDto> implements TaskOperation {
+public class TaskHandler<ResultType extends ImageDtoOperation> implements TaskOperation {
     private GetImageTask<ResultType> task;
     private Context context;
     private BaseTask.OnCompletedListener onCompletedListener;
@@ -79,7 +79,7 @@ public class TaskHandler<ResultType extends BaseDto> implements TaskOperation {
         this.onCompletedListener = onCompletedListener;
     }
 
-    public static class Builder<ResultType extends BaseDto> {
+    public static class Builder<ResultType extends ImageDtoOperation> {
         private Context context;
         private BaseTask.OnCompletedListener onCompletedListener;
         private BaseParameter parameter;

@@ -11,7 +11,7 @@ import ma.sdop.imagelist.common.web.parameter.BaseParameter;
  * Created by parkjoosung on 2017. 3. 17..
  */
 
-public interface DtoOperation extends Serializable {
+public interface ImageDtoOperation extends Serializable {
     List<ImageData> getImageData();
     int getCount();
     boolean isNext(BaseParameter parameter);

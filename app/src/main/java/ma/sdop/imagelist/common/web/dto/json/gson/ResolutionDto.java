@@ -1,12 +1,10 @@
 package ma.sdop.imagelist.common.web.dto.json.gson;
 
-import ma.sdop.imagelist.common.web.dto.BaseDto;
-
 /**
  * Created by parkjoosung on 2017. 3. 20..
  */
 
-public class ResolutionDto extends BaseDto {
+public class ResolutionDto {
     private int width;
     private int height;
     private String url;

@@ -21,7 +21,7 @@ import ma.sdop.imagelist.common.MaUtils;
 import ma.sdop.imagelist.common.data.ImageData;
 import ma.sdop.imagelist.common.web.BaseTask;
 import ma.sdop.imagelist.common.web.TaskHandler;
-import ma.sdop.imagelist.common.web.dto.BaseDto;
+import ma.sdop.imagelist.common.web.dto.ImageDtoOperation;
 
 public class MaImageDetailFragment extends BaseFragment {
     private ViewPager ma_image_viewpager;
@@ -69,7 +69,7 @@ public class MaImageDetailFragment extends BaseFragment {
         ma_image_viewpager.setCurrentItem(currentIndex);
     }
 
-    private void addSubviews(BaseDto dtoBase) {
+    private void addSubviews(ImageDtoOperation dtoBase) {
         if ( reloading && dtoBase.getImageData().size() == 0 ) MaUtils.showToast(activity, R.string.err_no_more_image);
 
         for (ImageData imageData : dtoBase.getImageData() ) {
@@ -99,7 +99,7 @@ public class MaImageDetailFragment extends BaseFragment {
 
     private final BaseTask.OnCompletedListener onCompletedListener = new BaseTask.OnCompletedListener() {
         @Override
-        public <T extends BaseDto> void onCompleted(boolean isSuccess, T result) {
+        public <T extends ImageDtoOperation> void onCompleted(boolean isSuccess, T result) {
             addSubviews(result);
         }
     };

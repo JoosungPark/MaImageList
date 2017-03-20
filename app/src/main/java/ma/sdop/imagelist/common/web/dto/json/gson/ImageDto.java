@@ -1,8 +1,6 @@
 package ma.sdop.imagelist.common.web.dto.json.gson;
 
-import ma.sdop.imagelist.common.web.dto.BaseDto;
-
-public class ImageDto extends BaseDto {
+public class ImageDto {
     private ResolutionDto standard_resolution;
     private ResolutionDto thumbnail;
     private ResolutionDto low_resolution;

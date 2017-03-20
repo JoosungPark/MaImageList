@@ -1,9 +1,8 @@
 package ma.sdop.imagelist.common.web.dto.json.gson;
 
 import ma.sdop.imagelist.common.data.ImageData;
-import ma.sdop.imagelist.common.web.dto.BaseDto;
 
-public class ItemDto extends BaseDto {
+public class ItemDto {
     private ImageDto images;
     private String id;
 

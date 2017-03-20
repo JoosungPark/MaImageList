@@ -6,7 +6,7 @@ import android.os.AsyncTask;
 
 import ma.sdop.imagelist.R;
 import ma.sdop.imagelist.common.MaUtils;
-import ma.sdop.imagelist.common.web.dto.BaseDto;
+import ma.sdop.imagelist.common.web.dto.ImageDtoOperation;
 import ma.sdop.imagelist.common.web.parameter.BaseParameter;
 
 abstract public class BaseTask extends AsyncTask<Void, Void, Boolean> {
@@ -24,7 +24,7 @@ abstract public class BaseTask extends AsyncTask<Void, Void, Boolean> {
     }
 
     public interface OnCompletedListener {
-        <T extends BaseDto> void onCompleted(boolean isSuccess, T result);
+        <T extends ImageDtoOperation> void onCompleted(boolean isSuccess, T result);
     }
 
     public abstract boolean isNext();

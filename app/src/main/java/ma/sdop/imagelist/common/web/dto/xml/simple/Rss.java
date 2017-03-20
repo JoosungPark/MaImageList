@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ma.sdop.imagelist.common.data.ImageData;
-import ma.sdop.imagelist.common.web.dto.BaseDto;
+import ma.sdop.imagelist.common.web.dto.ImageDtoOperation;
 import ma.sdop.imagelist.common.web.parameter.BaseParameter;
 import ma.sdop.imagelist.common.web.parameter.NParameter;
 
 @Root
-public class Rss extends BaseDto {
+public class Rss implements ImageDtoOperation {
     @Element
     private Channel channel;
 

@@ -1,13 +1,12 @@
 package ma.sdop.imagelist.common.web.dto.json.jackson;
 
 import ma.sdop.imagelist.common.data.ImageData;
-import ma.sdop.imagelist.common.web.dto.BaseDto;
 
 /**
  * Created by parkjoosung on 2017. 3. 20..
  */
 
-public class ItemBean extends BaseDto {
+public class ItemBean {
     private ImageBean images;
     private String id;
 

@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ma.sdop.imagelist.common.data.ImageData;
-import ma.sdop.imagelist.common.web.dto.BaseDto;
+import ma.sdop.imagelist.common.web.dto.ImageDtoOperation;
+import ma.sdop.imagelist.common.web.parameter.BaseParameter;
+import ma.sdop.imagelist.common.web.parameter.InstagramParameter;
 
-public class ItemsDto extends BaseDto {
+public class ItemsDto implements ImageDtoOperation {
     private String status;
     private boolean more_available;
     private List<ItemDto> items = new ArrayList<>();
@@ -60,5 +62,15 @@ public class ItemsDto extends BaseDto {
     @Override
     public int getCount() {
         return items == null ? 0 : items.size();
+    }
+
+    @Override
+    public boolean isNext(BaseParameter parameter) {
+        InstagramParameter parameterData = (InstagramParameter) parameter;
+        String maxId = getLastId();
+        if ( more_available ) parameterData.setMaxId(maxId);
+        else parameterData.setMaxId(null);
+
+        return more_available;
     }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ma.sdop.imagelist.common.data.ImageData;
-import ma.sdop.imagelist.common.web.dto.BaseDto;
+import ma.sdop.imagelist.common.web.dto.ImageDtoOperation;
 import ma.sdop.imagelist.common.web.parameter.BaseParameter;
 import ma.sdop.imagelist.common.web.parameter.InstagramParameter;
 
@@ -12,7 +12,7 @@ import ma.sdop.imagelist.common.web.parameter.InstagramParameter;
  * Created by parkjoosung on 2017. 3. 20..
  */
 
-public class ItemsBean extends BaseDto {
+public class ItemsBean implements ImageDtoOperation {
     private String status;
     private boolean more_available;
     private List<ItemBean> items = new ArrayList<>();

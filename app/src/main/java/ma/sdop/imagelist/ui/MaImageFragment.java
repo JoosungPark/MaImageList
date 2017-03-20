@@ -40,7 +40,7 @@ import ma.sdop.imagelist.common.web.TaskHandler;
 import ma.sdop.imagelist.common.web.TaskOperation;
 import ma.sdop.imagelist.common.web.WebConfig;
 import ma.sdop.imagelist.common.web.WebWrapper;
-import ma.sdop.imagelist.common.web.dto.BaseDto;
+import ma.sdop.imagelist.common.web.dto.ImageDtoOperation;
 import ma.sdop.imagelist.common.web.dto.json.gson.ItemsDto;
 import ma.sdop.imagelist.common.web.dto.json.jackson.ItemsBean;
 import ma.sdop.imagelist.common.web.dto.xml.simple.Rss;
@@ -126,7 +126,7 @@ public class MaImageFragment extends BaseFragment {
 
     private final BaseTask.OnCompletedListener onCompletedListener = new BaseTask.OnCompletedListener() {
         @Override
-        public <T extends BaseDto> void onCompleted(boolean isSuccess, T result) {
+        public <T extends ImageDtoOperation> void onCompleted(boolean isSuccess, T result) {
             if ( result == null ) {
                 @StringRes int wantedId;
                 if ( reload ) {
@@ -214,10 +214,6 @@ public class MaImageFragment extends BaseFragment {
         taskHandler.execute();
     }
 
-    private Class<? extends BaseDto> getDto() {
-        return Rss.class;
-    }
-
     private void onSearchInstagram(String userId) {
         InstagramParameter instagramParameter = new InstagramParameter(userId, "");
         WebWrapper webWrapper = new WebWrapper(activity, WebConfig.HOST_INSTAGRAM)
@@ -233,7 +229,7 @@ public class MaImageFragment extends BaseFragment {
         taskHandler.execute();
     }
 
-    private Class<? extends BaseDto> getResultType() {
+    private Class<? extends ImageDtoOperation> getResultType() {
         switch (operatorType) {
             case Gson:
                 return ItemsDto.class;

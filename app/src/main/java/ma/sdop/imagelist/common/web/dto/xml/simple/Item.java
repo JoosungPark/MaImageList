@@ -2,10 +2,8 @@ package ma.sdop.imagelist.common.web.dto.xml.simple;
 
 import org.simpleframework.xml.Element;
 
-import ma.sdop.imagelist.common.web.dto.BaseDto;
-
 @Element
-public class Item extends BaseDto {
+public class Item {
     @Element private String title;
 
     @Element private String link;

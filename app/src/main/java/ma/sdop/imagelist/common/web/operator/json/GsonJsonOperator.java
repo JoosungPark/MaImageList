@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import ma.sdop.imagelist.common.web.dto.BaseDto;
-
 public class GsonJsonOperator implements JsonOperator {
     private static JsonDeserializer<Date> dateDeserialize = new JsonDeserializer<Date>() {
         public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
@@ -26,16 +24,16 @@ public class GsonJsonOperator implements JsonOperator {
     };
 
     @Override
-    public <Dto extends BaseDto> Dto getDto(String body, Class<Dto> dtoClass, String... depths) throws Exception {
+    public <Dto> Dto getDto(String body, Class<Dto> dtoClass, String... depths) throws Exception {
         return fromJson(body, dtoClass, depths);
     }
 
     @Override
-    public <Dto extends BaseDto> List<Dto> getDtoList(String body, Class<Dto> type) throws Exception {
+    public <Dto> List<Dto> getDtoList(String body, Class<Dto> type) throws Exception {
         return fromJsonList(body, type);
     }
 
-    private <Dto extends BaseDto> Dto fromJson(String json, Class<Dto> dtoClass, String... depths) throws JSONException {
+    private <Dto> Dto fromJson(String json, Class<Dto> dtoClass, String... depths) throws JSONException {
         JSONObject jsonObject = getJSON(json, depths);
         if(jsonObject == null) {
             return null;
@@ -45,7 +43,7 @@ public class GsonJsonOperator implements JsonOperator {
         }
     }
 
-    private <DTO extends BaseDto> List<DTO> fromJsonList(String json, Class<DTO> type) throws JSONException {
+    private <DTO> List<DTO> fromJsonList(String json, Class<DTO> type) throws JSONException {
         ArrayList<DTO> list = new ArrayList<>();
         JSONArray array = getJSONArray(json);
         if (array != null) {
@@ -57,7 +55,7 @@ public class GsonJsonOperator implements JsonOperator {
         return list;
     }
 
-    private  <Dto extends BaseDto> Dto fromJson(Class<Dto> dtoClass, JSONObject json) {
+    private  <Dto> Dto fromJson(Class<Dto> dtoClass, JSONObject json) {
         Gson gson = getGson();
         return gson.fromJson(json.toString(), dtoClass);
     }

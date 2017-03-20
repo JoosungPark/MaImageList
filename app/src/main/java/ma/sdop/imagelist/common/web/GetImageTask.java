@@ -2,10 +2,10 @@ package ma.sdop.imagelist.common.web;
 
 import android.content.Context;
 
-import ma.sdop.imagelist.common.web.dto.BaseDto;
+import ma.sdop.imagelist.common.web.dto.ImageDtoOperation;
 import ma.sdop.imagelist.common.web.parameter.BaseParameter;
 
-class GetImageTask<ResultType extends BaseDto>  extends BaseTask {
+class GetImageTask<ResultType extends ImageDtoOperation> extends BaseTask {
     private ResultType results;
     private boolean moreAvailable = false;
     private BaseParameter parameter;

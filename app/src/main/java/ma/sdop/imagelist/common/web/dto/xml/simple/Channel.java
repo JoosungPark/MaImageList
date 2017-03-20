@@ -5,10 +5,8 @@ import org.simpleframework.xml.ElementList;
 
 import java.util.ArrayList;
 
-import ma.sdop.imagelist.common.web.dto.BaseDto;
-
 @Element
-public class Channel extends BaseDto {
+public class Channel {
     @Element private String title;
     @Element private String link;
     @Element private String description;

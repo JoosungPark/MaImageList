@@ -6,21 +6,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
 
-import ma.sdop.imagelist.common.web.dto.BaseDto;
 import ma.sdop.imagelist.common.web.operator.HttpOperator;
 
 public class JacksonJsonOperator implements HttpOperator {
     @Override
-    public <Dto extends BaseDto> Dto getDto(String body, Class<Dto> dtoClass, String... depths) throws Exception {
+    public <Dto> Dto getDto(String body, Class<Dto> dtoClass, String... depths) throws Exception {
         return getBean(body, dtoClass);
     }
 
     @Override
-    public <Dto extends BaseDto> List<Dto> getDtoList(String body, Class<Dto> type) throws Exception {
+    public <Dto> List<Dto> getDtoList(String body, Class<Dto> type) throws Exception {
         return null;
     }
 
-    private <Dto extends BaseDto> Dto getBean(String body, Class<Dto> dtoClass) throws Exception {
+    private <Dto> Dto getBean(String body, Class<Dto> dtoClass) throws Exception {
         ObjectMapper mapper = getObjectMapper();
         return mapper.readValue(body, dtoClass);
     }
@@ -31,7 +30,7 @@ public class JacksonJsonOperator implements HttpOperator {
         return mapper;
     }
 
-    private <Dto  extends BaseDto> List<Dto> getBeanList(String body, Class<Dto> dtoClass) throws Exception {
+    private <Dto> List<Dto> getBeanList(String body, Class<Dto> dtoClass) throws Exception {
         ObjectMapper mapper = getObjectMapper();
         return mapper.readValue(body, new TypeReference<List<Dto>>() { });
     }
