@@ -8,6 +8,7 @@ import ma.sdop.imagelist.ui.MaImageFragment;
 import uk.co.senab.photoview.log.LogManager;
 
 public class MainActivity extends BaseActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
