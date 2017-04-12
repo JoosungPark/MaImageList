@@ -1,4 +1,4 @@
-package ma.sdop.imagelist.mvvm.images;
+package ma.sdop.imagelist.mvvm.func.images;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ma.sdop.imagelist.R;
 import ma.sdop.imagelist.common.BaseFragment;
+import ma.sdop.imagelist.mvvm.network.ImageRetrieveManager;
 
 /**
  * Created by parkjoosung on 2017. 4. 5..
@@ -34,5 +35,13 @@ public class ImagesFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_ma_image, container, false);
         ButterKnife.bind(this, view);
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        ImageRetrieveManager manager = ImageRetrieveManager.getInstance();
+        manager.getImages("poemst", "");
     }
 }

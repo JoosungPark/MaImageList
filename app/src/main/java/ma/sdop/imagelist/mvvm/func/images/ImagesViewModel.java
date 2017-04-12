@@ -1,8 +1,9 @@
-package ma.sdop.imagelist.mvvm.images;
+package ma.sdop.imagelist.mvvm.func.images;
 
 import android.support.annotation.NonNull;
 
 import io.reactivex.disposables.CompositeDisposable;
+import ma.sdop.imagelist.mvvm.model.ImageType;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -26,6 +27,21 @@ public class ImagesViewModel implements ImagesContract.ViewModel {
 
     @Override
     public void unsubscribe() {
+
+    }
+
+    @Override
+    public void switchService(ImageType imageType) {
+
+    }
+
+    @Override
+    public void getImages() {
+
+    }
+
+    @Override
+    public void next() {
 
     }
 }

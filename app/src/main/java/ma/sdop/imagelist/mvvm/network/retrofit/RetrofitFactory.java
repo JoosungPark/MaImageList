@@ -12,10 +12,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class RetrofitFactory {
-    private RetrofitFactory instance;
+    private static RetrofitFactory instance;
+
+    private RetrofitFactory() { }
 
     public Retrofit getAdapter(ApiType type) {
-        return null;
+
+        return getInstagramAdapter();
     }
 
     private Retrofit getInstagramAdapter() {
@@ -27,7 +30,7 @@ public class RetrofitFactory {
                 .build();
     }
 
-    public RetrofitFactory getInstance() {
+    public static RetrofitFactory getInstance() {
         if ( instance == null ) {
             synchronized (RetrofitFactory.class) {
                 instance = new RetrofitFactory();

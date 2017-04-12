@@ -7,6 +7,10 @@ import ma.sdop.imagelist.common.data.ImageData;
 import ma.sdop.imagelist.common.web.dto.ImageDtoOperation;
 import ma.sdop.imagelist.common.web.parameter.BaseParameter;
 import ma.sdop.imagelist.common.web.parameter.InstagramParameter;
+import ma.sdop.imagelist.mvvm.model.ImageModel;
+import rx.functions.Func1;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ItemsDto implements ImageDtoOperation {
     private String status;
@@ -57,6 +61,15 @@ public class ItemsDto implements ImageDtoOperation {
             if (data != null) imageList.add(data);
         }
         return imageList;
+    }
+
+    public List<ImageModel> getImageModelList() {
+        List<ImageModel> imageModelList = new ArrayList<>();
+        for ( ItemDto itemDto : items ) {
+            ImageModel imageModel = itemDto.getImageModel();
+            if ( imageModel != null ) imageModelList.add(imageModel);
+        }
+        return imageModelList;
     }
 
     @Override

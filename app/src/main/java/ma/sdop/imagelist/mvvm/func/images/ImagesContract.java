@@ -1,8 +1,8 @@
-package ma.sdop.imagelist.mvvm.images;
+package ma.sdop.imagelist.mvvm.func.images;
 
 import ma.sdop.imagelist.mvvm.BaseView;
 import ma.sdop.imagelist.mvvm.BaseViewModel;
-import ma.sdop.imagelist.mvvm.model.source.ImageType;
+import ma.sdop.imagelist.mvvm.model.ImageType;
 
 /**
  * Created by parkjoosung on 2017. 4. 5..

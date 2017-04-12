@@ -1,4 +1,4 @@
-package ma.sdop.imagelist.mvvm.model.source;
+package ma.sdop.imagelist.mvvm.model;
 
 /**
  * Created by parkjoosung on 2017. 4. 5..

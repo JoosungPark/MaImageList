@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import ma.sdop.imagelist.common.BaseActivity;
 import ma.sdop.imagelist.common.DisableLogger;
-import ma.sdop.imagelist.ui.MaImageFragment;
+import ma.sdop.imagelist.mvvm.func.images.ImagesFragment;
 import uk.co.senab.photoview.log.LogManager;
 
 public class MainActivity extends BaseActivity {
@@ -15,6 +15,8 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         LogManager.setLogger(new DisableLogger());
 
-        getReplaceBuilder(MaImageFragment.class).replace(true);
+//        getReplaceBuilder(MaImageFragment.class).replace(true);
+
+        getReplaceBuilder(ImagesFragment.class).replace(true);
     }
 }

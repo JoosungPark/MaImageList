@@ -6,12 +6,13 @@ import io.reactivex.Observable;
 import ma.sdop.imagelist.common.web.dto.json.gson.ItemsDto;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by parkjoosung on 2017. 4. 10..
  */
 
 public interface IInstagramApi {
-    @GET("https://www.instagram.com/{userId}/media/?max_id={maxId}")
-    Observable<List<ItemsDto>> getImages(@Path("userId") String userId, @Path("maxId") String maxId);
+    @GET("{userId}/media")
+    Observable<ItemsDto> getImages(@Path("userId") String userId, @Query("maxId") String maxId);
 }
