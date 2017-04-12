@@ -55,19 +55,18 @@ public class ImageRetrieveManager {
     private void subscribeFromInstagram(String userId, String maxId) {
         Disposable disposable = paginator
                 .onBackpressureBuffer()
-                .concatMap(new Function<Integer, Publisher<List<ImageModel>>>() {
-                    @Override
-                    public Publisher<List<ImageModel>> apply(@NonNull Integer integer) throws Exception {
-                        return instagramApiService.getImages(new InstagramRequest(userId, maxId));
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(imageModelList -> {
-                            for ( ImageModel imageModel : imageModelList ) {
-                                Log.d("dd", imageModel.getImageUrl());
-                            }
-                        }
+                .concatMap( page -> instagramApiService.getImages(new InstagramRequest(userId, maxId))
 
+//                        new Function<Integer,
+//                        Publisher<List<ImageModel>>>() {
+//                    @Override
+//                    public Publisher<List<ImageModel>> apply(@NonNull Integer integer) throws Exception {
+//                        return instagramApiService.getImages(new InstagramRequest(userId, maxId));
+//                    }
+//                }
+                )
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(imageModelList -> imageModelList.forEach(imageModel -> Log.d("dd", imageModel.getImageUrl()))
                 );
 
         compositeDisposable.add(disposable);
